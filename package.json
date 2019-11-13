@@ -1,0 +1,45 @@
+{
+  "name": "bankaccountkataapi",
+  "version": "1.0.0",
+  "description": "Kata Bank Account",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:dev": "concurrently --handle-input \"wait-on dist/main.js && nodemon\" \"tsc -w -p tsconfig.build.json\" ",
+    "start:debug": "nodemon --config nodemon-debug.json",
+    "prestart:prod": "rimraf dist && npm run build",
+    "start:prod": "node dist/main.js",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilindadie/BankAccountKataApi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilindadie/BankAccountKataApi/issues"
+  },
+  "homepage": "https://github.com/emilindadie/BankAccountKataApi#readme",
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "@types/jest": "^24.0.22",
+    "@types/node": "^12.12.7",
+    "concurrently": "^5.0.0",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.0",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.2"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
