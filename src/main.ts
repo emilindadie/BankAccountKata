@@ -1,6 +1,9 @@
 import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as path from 'path';
+import "reflect-metadata";
+import {createConnection} from "typeorm";
+import {User} from "./entity/user";
 
 // initialize configuration
 dotenv.config();
@@ -8,6 +11,23 @@ dotenv.config();
 // port is now available to the Node.js runtime
 // as if it were an environment variable
 const port = process.env.SERVER_PORT;
+
+createConnection({
+  type: "mysql",
+  host: process.env.HOST,
+  port: Number(process.env.PORT),
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+  entities: [
+      User
+  ],
+  synchronize: true,
+  logging: false
+}).then(connection => {
+  // here you can start to work with your entities
+  console.log("Connected");
+}).catch(error => console.log(error));
 
 const app = express();
 
