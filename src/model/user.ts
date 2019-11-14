@@ -7,9 +7,5 @@ export class CreateUserDto {
 
     address: string;
  
-    accountNumber?: string;
-
     password: string;
-
-    money: number = 0;
 }
