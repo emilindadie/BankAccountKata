@@ -10,11 +10,13 @@ export class User {
     name: string;
 
     @Column()
+    email: string;
+
+    @Column()
     address: string;
  
     @Column()
     accountNumber: string;
-
 
     @Column()
     password: string;
