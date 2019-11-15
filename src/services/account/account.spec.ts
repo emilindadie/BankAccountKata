@@ -16,6 +16,6 @@ describe('Account Creation', () => {
         const output = await accountService.haveName(accountName);
 
         // Assert
-        expect(output).not.toEqual(true);
+        expect(output).toEqual(true);
     });
   });

@@ -1,5 +1,5 @@
-import { CreateUserDto } from "../../model/user";
-import { User } from "../../model/user.i";
+import { CreateUserDto } from "../../model/user/user";
+import { User } from "../../model/user/user.i";
 
 export const user = new CreateUserDto();
 user.email = "dadie.emilin@gmail.com";
