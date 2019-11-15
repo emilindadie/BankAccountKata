@@ -31,7 +31,6 @@ describe('User registration', () => {
         expect(output).not.toEqual(password);
     });
 
-
     it('Should create user', async() => {
         //Arrange
         const user = new CreateUserDto();
@@ -44,7 +43,7 @@ describe('User registration', () => {
             name : "Emilin",
             address: "",
             email :"dadie.emilin@gmail.com",
-            password: "tyttttrtr"
+            password: "toto"
         }
         spyOn(userService, 'createUser').and.returnValue(Promise.resolve(userMock));
 
@@ -53,5 +52,18 @@ describe('User registration', () => {
 
         // Assert
         expect(output.id).toBeDefined();
+    });
+
+    it('Should compare password', async() => {
+        //Arrange
+        const password = "toto";
+
+        const hashpassword = "$2b$10$g2UPqjMLKnksOzPukpCvD.LLjfxLji0GXP4iSmQh1HjPDZpsVEK3.";
+
+        //Act 
+        const output = await userService.comparePassword(password, hashpassword);
+
+        // Assert
+        expect(output).toEqual(true);
     });
   });
