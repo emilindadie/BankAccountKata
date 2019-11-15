@@ -3,10 +3,13 @@ import * as express from 'express';
 import * as path from 'path';
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import bodyParser = require('body-parser');
+import * as bodyParser from 'body-parser';
+import * as cookieParser from "cookie-parser";
 import { UserEntity } from 'src/entity/user';
 import { IndexRoute } from './routes/index/index';
 import { UserRoute } from './routes/user/user';
+import configurePassport from "./config";
+
 
 class App {
   public app: express.Application;
@@ -22,7 +25,11 @@ class App {
 
   private config(): void {
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser()); // read cookies (needed for auth)
+    
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    configurePassport(this.app)
+
     this.app.set('views', path.join(__dirname, 'views'));
     this.app.set('view engine', 'ejs');
     dotenv.config();
