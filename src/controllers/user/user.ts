@@ -2,8 +2,6 @@ import { UserService } from "src/services/user.service";
 import { Request, Response } from "express";
 import * as SignOptions from "jsonwebtoken";
 import * as jwt from "jsonwebtoken";
-
-
 import * as dotenv from 'dotenv';
 import { User } from "src/model/user.i";
 
