@@ -1,4 +1,4 @@
-import {getManager } from "typeorm";
+import {getManager, Any } from "typeorm";
 import { UserEntity } from "../entity/user";
 import { CreateUserDto } from "../model/user";
 import { User } from "../model/user.i";
@@ -40,5 +40,10 @@ export class UserService {
             return true
         }
         return false
+    }
+
+    async logUser(email : string, password: string){
+
+        return {};
     }
 }

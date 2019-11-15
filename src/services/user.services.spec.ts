@@ -66,4 +66,17 @@ describe('User registration', () => {
         // Assert
         expect(output).toEqual(true);
     });
+
+
+    it('Should log user', async() => {
+        //Arrange
+        const email = "dadie.emilin@gmail.com"
+        const password = "toto";
+
+        //Act 
+        const output : any = await userService.logUser(email, password);
+
+        // Assert
+        expect(output.id).toBeDefined();
+    });
   });
