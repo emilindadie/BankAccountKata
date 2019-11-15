@@ -1,6 +1,5 @@
 import { UserService } from "./user.service";
-import { CreateUserDto } from "../model/user";
-import { User } from "../model/user.i";
+import {user, userMock} from "../test-files/index"
 
 describe('User registration', () => {
     let userService : UserService;
@@ -33,22 +32,12 @@ describe('User registration', () => {
 
     it('Should create user', async() => {
         //Arrange
-        const user = new CreateUserDto();
-        user.email = "dadie.emilin@gmail.com";
-        user.name = "Emilin";
-        user.password = "toto";
-        user.address = "14 rue de Mulhouse";
-        const userMock : User = {
-            id : 1,
-            name : "Emilin",
-            address: "",
-            email :"dadie.emilin@gmail.com",
-            password: "toto"
-        }
-        spyOn(userService, 'createUser').and.returnValue(Promise.resolve(userMock));
+        const myUser = user;
+        const myUserMock = userMock;
+        spyOn(userService, 'createUser').and.returnValue(Promise.resolve(myUserMock));
 
         //Act 
-        const output = await userService.createUser(user);
+        const output = await userService.createUser(myUser);
 
         // Assert
         expect(output.id).toBeDefined();
@@ -57,7 +46,6 @@ describe('User registration', () => {
     it('Should compare password', async() => {
         //Arrange
         const password = "toto";
-
         const hashpassword = "$2b$10$g2UPqjMLKnksOzPukpCvD.LLjfxLji0GXP4iSmQh1HjPDZpsVEK3.";
 
         //Act 
@@ -72,6 +60,9 @@ describe('User registration', () => {
         //Arrange
         const email = "dadie.emilin@gmail.com"
         const password = "toto";
+        const myUserMock = userMock;
+
+        spyOn(userService, 'logUser').and.returnValue(Promise.resolve(myUserMock));
 
         //Act 
         const output : any = await userService.logUser(email, password);
