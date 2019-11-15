@@ -2,8 +2,14 @@ import {getManager } from "typeorm";
 import { UserEntity } from "../entity/user";
 import { CreateUserDto } from "../model/user";
 import { User } from "../model/user.i";
+import * as bcrypt from 'bcrypt';
+import * as dotenv from 'dotenv';
 
 export class UserService {
+
+    constructor(){
+        dotenv.config();
+    }
     async checkIfEmailExist(email : string) : Promise<Boolean>{
        const users = await getManager().getRepository(UserEntity).find({ where: { email: email } });
        if(users.length > 0){
@@ -22,7 +28,9 @@ export class UserService {
 
 
 
-    cryptPassword(password : string){
-        return "";
+    cryptPassword(password : string) : Promise<String>{
+        return bcrypt.hash(password, Number(process.env.SALT)).then(function(hash) {
+            return hash;
+        });
     }
 }

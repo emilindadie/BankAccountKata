@@ -21,16 +21,14 @@ describe('User registration', () => {
 
 
     it('Should crypt password', async() => {
-
         //Arrange
         const password = "toto";
 
         //Act 
         const output = await userService.cryptPassword(password);
 
-
         // Assert
-        expect(output).toEqual("azeazeaze");
+        expect(output).not.toEqual(password);
     });
 
 
