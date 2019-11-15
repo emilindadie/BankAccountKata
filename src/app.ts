@@ -2,19 +2,22 @@ import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as path from 'path';
 import "reflect-metadata";
-import {createConnection, getConnection} from "typeorm";
-import { IndexRoute } from 'src/routes/index';
+import {createConnection} from "typeorm";
 import bodyParser = require('body-parser');
 import { UserEntity } from 'src/entity/user';
+import { IndexRoute } from './routes/index/index';
+import { UserRoute } from './routes/user/user';
 
 class App {
   public app: express.Application;
   public indexRoutes: IndexRoute = new IndexRoute();
+  public userRoutes: UserRoute = new UserRoute();
 
   constructor() {
     this.app = express();
     this.config();
     this.indexRoutes.routes(this.app);
+    this.userRoutes.routes(this.app);
   }
 
   private config(): void {

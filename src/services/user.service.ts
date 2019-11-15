@@ -1,11 +1,9 @@
-import {getManager, Any } from "typeorm";
+import {getManager} from "typeorm";
 import { UserEntity } from "../entity/user";
 import { CreateUserDto } from "../model/user";
 import { User } from "../model/user.i";
 import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
-import { user} from '../test-files/index'
-
 
 export class UserService {
 
@@ -20,10 +18,10 @@ export class UserService {
        return false;
     }
 
-    async createUser(createUserDto : CreateUserDto) : Promise<User> {
+    async createUser(createUserDto : CreateUserDto) : Promise<any> {
         const emailExist = await this.checkIfEmailExist(createUserDto.email);
         if(emailExist){
-            throw new Error("L'email existe déja");
+            throw new Error("L'email existe deja!");
         }
         createUserDto.password = await this.cryptPassword(createUserDto.password);
         return await  getManager().getRepository(UserEntity).save(createUserDto);
@@ -31,7 +29,6 @@ export class UserService {
 
     async cryptPassword(password : string) : Promise<string>{
         return await bcrypt.hash(password, Number(process.env.SALT)).then(function(hash) {
-            console.log(hash);
             return hash;
         });
     }
@@ -47,12 +44,12 @@ export class UserService {
     async logUser(email : string, password: string) : Promise<User> {
         const users = await getManager().getRepository(UserEntity).find({ where: { email: email } });
         if(users.length == 0){
-            throw new Error("L'email ou le mot de passe est incorrect");
+            throw new Error("L'email ou le mot de passe est incorrect!");
         }
         const canLogin = await this.comparePassword(password, users[0].password);
         if(canLogin){
             return users[0];
         }
-        throw new Error("L'email ou le mot de passe est incorrect");
+        throw new Error("L'email ou le mot de passe est incorrect!");
     }
 }
