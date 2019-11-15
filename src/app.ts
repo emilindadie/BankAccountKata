@@ -6,6 +6,7 @@ import {createConnection, getConnection} from "typeorm";
 import { IndexRoute } from 'src/routes/index';
 import bodyParser = require('body-parser');
 import { UserEntity } from 'src/entity/user';
+import { UserService } from './services/user.service';
 
 class App {
   public app: express.Application;
@@ -23,7 +24,6 @@ class App {
     this.app.set('views', path.join(__dirname, 'views'));
     this.app.set('view engine', 'ejs');
     dotenv.config();
-
 
     createConnection({
       type: "mysql",

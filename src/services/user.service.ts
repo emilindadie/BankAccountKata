@@ -1,17 +1,11 @@
-import {Repository } from "typeorm";
+import {getManager } from "typeorm";
 import { UserEntity } from "../entity/user";
 import { CreateUserDto } from "../model/user";
 import { User } from "../model/user.i";
 
 export class UserService {
-    private userRepository : Repository<UserEntity>;
-
-    constructor(){
-        this.userRepository = new Repository<UserEntity>()
-    }
-
     async checkIfEmailExist(email : string) : Promise<Boolean>{
-       const users = await this.userRepository.find({ where: { email: email } });
+       const users = await getManager().getRepository(UserEntity).find({ where: { email: email } });
        if(users.length > 0){
            return true
        }
@@ -23,6 +17,12 @@ export class UserService {
         if(emailExist){
             throw new Error("L'email existe déja");
         }
-        return await  this.userRepository.save(createUserDto);
+        return await  getManager().getRepository(UserEntity).save(createUserDto);
+    }
+
+
+
+    cryptPassword(password : string){
+        return "";
     }
 }

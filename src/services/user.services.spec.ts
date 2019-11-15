@@ -20,6 +20,20 @@ describe('User registration', () => {
     });
 
 
+    it('Should crypt password', async() => {
+
+        //Arrange
+        const password = "toto";
+
+        //Act 
+        const output = await userService.cryptPassword(password);
+
+
+        // Assert
+        expect(output).toEqual("azeazeaze");
+    });
+
+
     it('Should create user', async() => {
         //Arrange
         const user = new CreateUserDto();
