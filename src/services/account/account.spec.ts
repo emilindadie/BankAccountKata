@@ -10,12 +10,12 @@ describe('Account Creation', () => {
 
     it('Should check if account name is define', async() => {
         //Arrange
-        const accountName = "Compte A"
+        const accountName = ""
 
         //Act 
         const output = await accountService.haveName(accountName);
 
         // Assert
-        expect(output).not.toEqual("");
+        expect(output).not.toEqual(true);
     });
   });
