@@ -1,7 +1,8 @@
-
  
-export class CreateUserDto {
+export interface User {
   
+    id: number;
+    
     name: string;
 
     email: string;

@@ -5,7 +5,7 @@ import "reflect-metadata";
 import {createConnection, getConnection} from "typeorm";
 import { IndexRoute } from 'src/routes/index';
 import bodyParser = require('body-parser');
-import { User } from 'src/entity/user';
+import { UserEntity } from 'src/entity/user';
 
 class App {
   public app: express.Application;
@@ -33,7 +33,7 @@ class App {
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
       entities: [
-          User
+        UserEntity
       ],
       synchronize: true,
       logging: false

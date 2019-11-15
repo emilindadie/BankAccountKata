@@ -1,8 +1,12 @@
 import { UserService } from "./user.service";
 import { CreateUserDto } from "../model/user";
+import { User } from "../model/user.i";
 
 describe('User registration', () => {
-    const userService = new UserService();
+    let userService : UserService;
+    beforeEach(() => {
+        userService = new UserService();
+    });
 
     it('Should check if email exist', async() => {
         //Arrange
@@ -21,12 +25,21 @@ describe('User registration', () => {
         const user = new CreateUserDto();
         user.email = "dadie.emilin@gmail.com";
         user.name = "Emilin";
+        user.password = "toto";
         user.address = "14 rue de Mulhouse";
-        
+        const userMock : User = {
+            id : 1,
+            name : "Emilin",
+            address: "",
+            email :"dadie.emilin@gmail.com",
+            password: "tyttttrtr"
+        }
+        spyOn(userService, 'createUser').and.returnValue(Promise.resolve(userMock));
+
         //Act 
         const output = await userService.createUser(user);
 
         // Assert
-        expect(output.length).toEqual(1);
+        expect(output.id).toBeDefined();
     });
   });
