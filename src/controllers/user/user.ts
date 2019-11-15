@@ -1,9 +1,9 @@
-import { UserService } from "src/services/user.service";
+import { UserService } from "src/services/user/user";
 import { Request, Response } from "express";
 import * as SignOptions from "jsonwebtoken";
 import * as jwt from "jsonwebtoken";
 import * as dotenv from 'dotenv';
-import { User } from "src/model/user.i";
+import { User } from "src/model/user/user.i";
 
 export class UserController {
     

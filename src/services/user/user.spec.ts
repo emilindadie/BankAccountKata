@@ -1,5 +1,5 @@
-import { UserService } from "./user.service";
-import {user, userMock} from "../test-files/index"
+import { UserService } from "./user";
+import {user, userMock} from "../../test-files/index"
 
 describe('User registration', () => {
     let userService : UserService;

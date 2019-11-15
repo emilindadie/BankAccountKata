@@ -1,7 +1,7 @@
 import {getManager} from "typeorm";
-import { UserEntity } from "../entity/user";
-import { CreateUserDto } from "../model/user";
-import { User } from "../model/user.i";
+import { UserEntity } from "../../entity/user";
+import { CreateUserDto } from "../../model/user/user";
+import { User } from "../../model/user/user.i";
 import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 
