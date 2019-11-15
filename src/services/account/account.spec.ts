@@ -10,7 +10,7 @@ describe('Account Creation', () => {
 
     it('Should check if account name is define', async() => {
         //Arrange
-        const accountName = ""
+        const accountName = "Compte A"
 
         //Act 
         const output = await accountService.haveName(accountName);
