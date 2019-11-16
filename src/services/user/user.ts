@@ -4,6 +4,8 @@ import { CreateUserDto } from '../../model/user/user';
 import { User } from '../../model/user/user.i';
 import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
+import { AccountEntity } from 'src/entity/account';
+import { Account } from 'src/model/account/account.i';
 
 export class UserService {
 
@@ -48,5 +50,9 @@ export class UserService {
             return user;
         }
         throw new Error('L\'email ou le mot de passe est incorrect!');
+    }
+
+    async getUserAccount(userId: number): Promise<Account[]> {
+     return await getManager().getRepository(AccountEntity).find({ where: { userId } });
     }
 }

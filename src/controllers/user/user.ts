@@ -4,6 +4,7 @@ import * as SignOptions from 'jsonwebtoken';
 import * as jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 import { User } from 'src/model/user/user.i';
+import { Account } from 'src/model/account/account.i';
 
 export class UserController {
     public UserController() {
@@ -32,6 +33,20 @@ export class UserController {
                     access_token: jwt.sign(payload, process.env.JWTSECRET, jwtOptions),
                     user: logUserResponse,
                 },
+            });
+        } catch (e) {
+            res.send({error: e.message });
+        }
+    }
+
+    public async getUserAccount(req: Request, res: Response) {
+        const userService = new UserService();
+        const userId = Number(req.params.id);
+
+        try {
+            const userAccountResponse: Account[] = await userService.getUserAccount(userId);
+            res.send({
+                data: userAccountResponse,
             });
         } catch (e) {
             res.send({error: e.message });

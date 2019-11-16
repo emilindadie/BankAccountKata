@@ -7,6 +7,7 @@ export class UserRoute {
     public routes(app): void {
         app.route('/user').post(this.userController.creacteUser);
         app.route('/user').get(this.userController.logUser);
+        app.route('/user/:id/account').get(this.protectedRoute(), this.userController.getUserAccount);
         app.route('/user/protected').get(this.protectedRoute(), this.userController.protectedRoute);
     }
     private protectedRoute() {
