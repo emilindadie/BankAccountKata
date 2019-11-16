@@ -1,22 +1,19 @@
-import * as passport from "passport";
+import * as passport from 'passport';
 import {
   Strategy as JWTStrategy, ExtractJwt,
-  StrategyOptions
-} from "passport-jwt";
-import { Application } from "express";
-import { UserEntity } from "src/entity/user";
+  StrategyOptions,
+} from 'passport-jwt';
+import { Application } from 'express';
+import { UserEntity } from 'src/entity/user';
 import * as dotenv from 'dotenv';
 
 export default (app: Application) => {
-
   dotenv.config();
   app.use(passport.initialize());
-
   const options: StrategyOptions = {
     jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWTSECRET
+    secretOrKey: process.env.JWTSECRET,
   };
-
   passport.use(
     new JWTStrategy(options, (payload, done) => {
         UserEntity.findOne({ where: { id: payload.id }}).then(user => {
@@ -30,6 +27,6 @@ export default (app: Application) => {
                 return done(err, false);
             }
         });
-    })
+    }),
   );
 };

@@ -1,71 +1,69 @@
-import { UserService } from "./user";
-import {user, userMock} from "../../test-files/index"
+import { UserService } from './user';
+import {user, userMock} from '../../test-files/index';
 
 describe('User registration', () => {
-    let userService : UserService;
+    let userService: UserService;
     beforeEach(() => {
         userService = new UserService();
     });
 
-    it('Should check if email exist', async() => {
-        //Arrange
-        const email = "dadie.emilin@gmail.com"
+    it('Should check if email exist', async () => {
+        // Arrange
+        const email = 'dadie.emilin@gmail.com';
         spyOn(userService, 'checkIfEmailExist').and.returnValue(Promise.resolve(false));
 
-        //Act 
+        // Act
         const output = await userService.checkIfEmailExist(email);
         // Assert
         expect(output).toEqual(false);
     });
 
+    it('Should crypt password', async () => {
+        // Arrange
+        const password = 'toto';
 
-    it('Should crypt password', async() => {
-        //Arrange
-        const password = "toto";
-
-        //Act 
+        // Act
         const output = await userService.cryptPassword(password);
 
         // Assert
         expect(output).not.toEqual(password);
     });
 
-    it('Should create user', async() => {
-        //Arrange
+    it('Should create user', async () => {
+        // Arrange
         const myUser = user;
         const myUserMock = userMock;
         spyOn(userService, 'createUser').and.returnValue(Promise.resolve(myUserMock));
 
-        //Act 
+        // Act
         const output = await userService.createUser(myUser);
 
         // Assert
         expect(output.id).toBeDefined();
     });
 
-    it('Should compare password', async() => {
-        //Arrange
-        const password = "toto";
-        const hashpassword = "$2b$10$g2UPqjMLKnksOzPukpCvD.LLjfxLji0GXP4iSmQh1HjPDZpsVEK3.";
+    it('Should compare password', async () => {
+        // Arrange
+        const password = 'toto';
+        const hashpassword = '$2b$10$g2UPqjMLKnksOzPukpCvD.LLjfxLji0GXP4iSmQh1HjPDZpsVEK3.';
 
-        //Act 
+        // Act
         const output = await userService.comparePassword(password, hashpassword);
 
         // Assert
         expect(output).toEqual(true);
     });
 
-
-    it('Should log user', async() => {
-        //Arrange
-        const email = "dadie.emilin@gmail.com"
-        const password = "toto";
+    it('Should log user', async () => {
+        // Arrange
+        const email = 'dadie.emilin@gmail.com';
+        const password = 'toto';
         const myUserMock = userMock;
 
         spyOn(userService, 'logUser').and.returnValue(Promise.resolve(myUserMock));
 
-        //Act 
-        const output : any = await userService.logUser(email, password);
+        // Act
+        const output: any = await userService.logUser(email, password);
 
         // Assert
         expect(output.id).toBeDefined();

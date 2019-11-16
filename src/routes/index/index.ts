@@ -1,9 +1,8 @@
-import { IndexController } from "src/controllers/index/index";
+import { IndexController } from 'src/controllers/index/index';
 
 export class IndexRoute {
     public indexController: IndexController = new IndexController();
-    
     public routes(app): void {
-        app.route("/").get(this.indexController.index);
+        app.route('/').get(this.indexController.index);
     }
 }

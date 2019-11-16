@@ -1,9 +1,6 @@
 
 describe('MainApp', () => {
-
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-
-    });
+    it('should return "Hello World!"', () => {});
   });
 });

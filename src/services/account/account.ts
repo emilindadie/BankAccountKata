@@ -1,11 +1,13 @@
+export class AccountService {
 
-
-export class AccountService{
-
-    haveName(name : string){
-        if(name && name.length > 0){
+    haveName(name: string) {
+        if (name && name.length > 0) {
             return true;
         }
-        return false
+        return false;
+    }
+
+    createAccount(name: string) {
+        return '';
     }
 }
