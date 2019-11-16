@@ -21,3 +21,23 @@ Think of your personal bank account experience When in doubt, go for the simples
 **In order to** check my operations  
 **As a** bank client  
 **I want to** see the history (operation, date, amount, balance)  of my operations  
+
+
+# Run api
+```sh
+$ npm run start
+```
+
+# Run api in debug mode
+```sh
+$ npm run start:debug
+```
+
+# Run tests
+```sh
+$ npm run test  
+```
+
+# Run tests with coverage
+```sh
+$ npm run test:cov 

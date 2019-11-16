@@ -4,8 +4,8 @@ import { CreateUserDto } from '../../model/user/user';
 import { User } from '../../model/user/user.i';
 import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
-import { AccountEntity } from 'src/entity/account';
-import { Account } from 'src/model/account/account.i';
+import { AccountEntity } from '../../entity/account';
+import { Account } from '../../model/account/account.i';
 
 export class UserService {
 
