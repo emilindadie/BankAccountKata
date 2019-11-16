@@ -19,7 +19,7 @@ describe('Account Creation', () => {
         expect(output).toEqual(true);
     });
 
-    it('Should create account', async () => {
+    it('Should create user account', async () => {
         // Arrange
         const myAccount = createAccountDto;
         spyOn(accountService, 'createAccount').and.returnValue(Promise.resolve(accountMock));
