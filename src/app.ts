@@ -9,6 +9,7 @@ import { UserEntity } from 'src/entity/user';
 import { IndexRoute } from './routes/index/index';
 import { UserRoute } from './routes/user/user';
 import configurePassport from './config';
+import { AccountEntity } from './entity/account';
 
 class App {
   public app: express.Application;
@@ -38,6 +39,7 @@ class App {
       database: process.env.DATABASE,
       entities: [
         UserEntity,
+        AccountEntity,
       ],
       synchronize: true,
       logging: false,

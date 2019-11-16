@@ -17,7 +17,7 @@ export class UserService {
        }
        return false;
     }
-    async createUser(createUserDto: CreateUserDto): Promise<any> {
+    async createUser(createUserDto: CreateUserDto): Promise<User> {
         const emailExist = await this.checkIfEmailExist(createUserDto.email);
         if (emailExist) {
             throw new Error('L\'email existe deja!');

@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne} from 'typeorm';
+import { UserEntity } from './user';
 
 @Entity()
 export class AccountEntity extends BaseEntity {
@@ -8,4 +9,6 @@ export class AccountEntity extends BaseEntity {
     name: string;
     @Column()
     solde: number;
+    @ManyToOne(type => UserEntity, user => user.accounts)
+    user: UserEntity;
 }

@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany} from 'typeorm';
+import { AccountEntity } from './account';
 @Entity()
 export class UserEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -11,4 +12,6 @@ export class UserEntity extends BaseEntity {
     address: string;
     @Column()
     password: string;
+    @OneToMany(type => AccountEntity, account => account.user)
+    accounts: AccountEntity[];
 }
