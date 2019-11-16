@@ -1,5 +1,5 @@
 import { UserService } from './user';
-import {user, userMock} from '../../test-files/index';
+import {createUserDto, userMock} from '../../test-files/index';
 
 describe('User registration', () => {
     let userService: UserService;
@@ -31,7 +31,7 @@ describe('User registration', () => {
 
     it('Should create user', async () => {
         // Arrange
-        const myUser = user;
+        const myUser = createUserDto;
         const myUserMock = userMock;
         spyOn(userService, 'createUser').and.returnValue(Promise.resolve(myUserMock));
 

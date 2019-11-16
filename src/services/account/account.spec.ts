@@ -1,4 +1,5 @@
 import { AccountService } from './account';
+import { createAccountDto, accountMock} from '../../test-files';
 
 describe('Account Creation', () => {
 
@@ -20,11 +21,11 @@ describe('Account Creation', () => {
 
     it('Should create account', async () => {
         // Arrange
-        const accountName = 'Compte A';
-        spyOn(accountService, 'createAccount').and.returnValue(Promise.resolve(''));
+        const myAccount = createAccountDto;
+        spyOn(accountService, 'createAccount').and.returnValue(Promise.resolve(accountMock));
 
         // Act
-        const output: any = await accountService.createAccount(accountName);
+        const output: any = await accountService.createAccount(myAccount);
 
         // Assert
         expect(output.id).toBeDefined();

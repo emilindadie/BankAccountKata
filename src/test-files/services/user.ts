@@ -1,11 +1,11 @@
 import { CreateUserDto } from '../../model/user/user';
 import { User } from '../../model/user/user.i';
 
-export const user = new CreateUserDto();
-user.email = 'dadie.emilin@gmail.com';
-user.name = 'Emilin';
-user.password = 'toto';
-user.address = '14 rue de Mulhouse';
+export const createUserDto = new CreateUserDto();
+createUserDto.email = 'dadie.emilin@gmail.com';
+createUserDto.name = 'Emilin';
+createUserDto.password = 'toto';
+createUserDto.address = '14 rue de Mulhouse';
 
 export const userMock: User = {
     id : 1,

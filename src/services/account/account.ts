@@ -1,3 +1,7 @@
+import { AccountEntity } from '../../entity/account';
+import { getManager } from 'typeorm';
+import { CreateAccountDto } from '../../model/account/account';
+
 export class AccountService {
 
     haveName(name: string) {
@@ -7,7 +11,11 @@ export class AccountService {
         return false;
     }
 
-    createAccount(name: string) {
-        return '';
+    async createAccount(createAccountDto: CreateAccountDto) {
+        const haveName = await this.haveName(createAccountDto.name);
+        if (!haveName) {
+            throw new Error('Le compte doit avoir un nom!');
+        }
+        return await getManager().getRepository(AccountEntity).save(createAccountDto);
     }
 }
