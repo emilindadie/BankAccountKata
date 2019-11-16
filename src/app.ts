@@ -10,17 +10,20 @@ import { IndexRoute } from './routes/index/index';
 import { UserRoute } from './routes/user/user';
 import configurePassport from './config';
 import { AccountEntity } from './entity/account';
+import { AccountRoute } from './routes/account/account';
 
 class App {
   public app: express.Application;
   public indexRoutes: IndexRoute = new IndexRoute();
   public userRoutes: UserRoute = new UserRoute();
+  public accountRoutes: AccountRoute = new AccountRoute();
 
   constructor() {
     this.app = express();
     this.config();
     this.indexRoutes.routes(this.app);
     this.userRoutes.routes(this.app);
+    this.accountRoutes.routes(this.app);
   }
   private config(): void {
     this.app.use(bodyParser.json());

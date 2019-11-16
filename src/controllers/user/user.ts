@@ -13,8 +13,8 @@ export class UserController {
         const userService = new UserService();
         const user = req.body;
         try {
-            const creacteUserResponse = await userService.createUser(user);
-            res.send({data : creacteUserResponse });
+            const createUserResponse = await userService.createUser(user);
+            res.send({data : createUserResponse });
         } catch (e) {
             res.send({error : e.message });
         }

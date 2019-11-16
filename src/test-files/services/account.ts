@@ -13,7 +13,6 @@ export const accountMock: Account = {
         name: 'toto',
         email: 'dadie.emilin@gmail.com',
         address: '14 rue de Mulhouse',
-        password: 'toto',
         accounts: [],
     },
 };

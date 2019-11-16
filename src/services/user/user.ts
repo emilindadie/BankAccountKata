@@ -23,7 +23,9 @@ export class UserService {
             throw new Error('L\'email existe deja!');
         }
         createUserDto.password = await this.cryptPassword(createUserDto.password);
-        return await  getManager().getRepository(UserEntity).save(createUserDto);
+        const createUserResponse = await getManager().getRepository(UserEntity).save(createUserDto);
+        delete createUserResponse.password;
+        return createUserResponse;
     }
     async cryptPassword(password: string): Promise<string> {
         return await bcrypt.hash(password, Number(process.env.SALT)).then((hash) => hash);
@@ -36,13 +38,14 @@ export class UserService {
         return false;
     }
     async logUser(email: string, password: string): Promise<User> {
-        const users = await getManager().getRepository(UserEntity).findOne({email});
-        if (users) {
+        const user = await getManager().getRepository(UserEntity).findOne({email});
+        if (!user) {
             throw new Error('L\'email ou le mot de passe est incorrect!');
         }
-        const canLogin = await this.comparePassword(password, users[0].password);
+        const canLogin = await this.comparePassword(password, user.password);
         if (canLogin) {
-            return users[0];
+            delete user.password;
+            return user;
         }
         throw new Error('L\'email ou le mot de passe est incorrect!');
     }

@@ -7,7 +7,7 @@ export class AccountEntity extends BaseEntity {
     id: number;
     @Column()
     name: string;
-    @Column()
+    @Column({default: 0})
     solde: number;
     @ManyToOne(type => UserEntity, user => user.accounts)
     user: UserEntity;

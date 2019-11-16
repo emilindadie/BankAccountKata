@@ -12,6 +12,5 @@ export const userMock: User = {
     name : 'Emilin',
     address: '',
     email: 'dadie.emilin@gmail.com',
-    password: 'toto',
     accounts: [],
 };
