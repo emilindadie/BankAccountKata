@@ -30,4 +30,8 @@ export class AccountService {
         }
         return false;
     }
+
+    saveMoney(money: number) {
+        return "";
+    }
 }

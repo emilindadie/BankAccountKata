@@ -52,4 +52,37 @@ describe('Account Creation', () => {
         // Assert
         expect(output).toEqual(false);
     });
+
+    it('Should check if money is not négatif or null', async () => {
+        // Arrange
+        const input = null;
+
+        // Act
+        const output: any = await accountService.canIncreaseSolde(input);
+
+        // Assert
+        expect(output).toEqual(false);
+    });
+
+    it('Should check if money is not négatif or null', async () => {
+        // Arrange
+        const input = 500;
+
+        // Act
+        const output: any = await accountService.canIncreaseSolde(input);
+
+        // Assert
+        expect(output).toEqual(true);
+    });
+
+    it('Should not save negatif or null money in account', async () => {
+        // Arrange
+        const input = Number(-56666);
+
+        // Act
+        const output: any = await accountService.saveMoney(input);
+
+        // Assert
+        expect(output).toBeInstanceOf(Error);
+    });
 });
