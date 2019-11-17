@@ -77,12 +77,14 @@ describe('Account Creation', () => {
 
     it('Should not save negatif or null money in account', async () => {
         // Arrange
-        const input = Number(-56666);
-
-        // Act
-        const output: any = await accountService.saveMoney(input);
-
-        // Assert
-        expect(output).toBeInstanceOf(Error);
+        const inputId = 1;
+        const inputMoney = Number(-56666);
+        try {
+            // Act
+            const output: any = await accountService.saveMoney(inputId, inputMoney);
+        } catch (e) {
+            // Assert
+            expect(e).toBeInstanceOf(Error);
+        }
     });
 });

@@ -2,6 +2,7 @@ import { AccountEntity } from '../../entity/account';
 import { getManager } from 'typeorm';
 import { CreateAccountDto } from '../../model/account/account';
 import { Account } from '../../model/account/account.i';
+import { User } from 'dist/model/user/user.i';
 
 export class AccountService {
 
@@ -31,7 +32,17 @@ export class AccountService {
         return false;
     }
 
-    saveMoney(money: number) {
-        return "";
+    async saveMoney(accountId: number, money: number): Promise<Account> {
+        const canSave = this.canIncreaseSolde(money);
+        if (!canSave) {
+            throw new Error('Money négatif ou null');
+        }
+        return await this.makeSaveMoney(accountId, money);
+    }
+
+    async makeSaveMoney(accountId: number, money: number): Promise<Account> {
+        const account =  await getManager().getRepository(AccountEntity).findOne({id: accountId});
+        account.solde += money;
+        return await account.save();
     }
 }
