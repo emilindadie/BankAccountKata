@@ -64,6 +64,6 @@ export class AccountService {
     }
 
     async getAccountById(id: number) {
-        return await getManager().getRepository(AccountEntity).findOne({ id: id });
+        return await getManager().getRepository(AccountEntity).findOne({ id });
     }
 }

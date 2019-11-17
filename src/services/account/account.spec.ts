@@ -101,7 +101,6 @@ describe('Account Creation', () => {
         expect(output.id).toBeDefined();
     });
 
-
     it('Should not get negatif or null money from account', async () => {
         // Arrange
         const inputId = 1;
@@ -114,5 +113,19 @@ describe('Account Creation', () => {
             // Assert
             expect(e).toBeInstanceOf(Error);
         }
+    });
+
+    it('Should get positif money from account', async () => {
+        // Arrange
+        const inputId = 1;
+        const inputMoney = Number(300);
+
+        spyOn(accountService, 'getMoney').and.returnValue(Promise.resolve(accountMock));
+
+        // Act
+        const output: any = await accountService.getMoney(inputId, inputMoney);
+
+        // Assert
+        expect(output.id).toBeDefined();
     });
 });
