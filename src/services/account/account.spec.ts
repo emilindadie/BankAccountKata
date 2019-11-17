@@ -87,4 +87,17 @@ describe('Account Creation', () => {
             expect(e).toBeInstanceOf(Error);
         }
     });
+
+    it('Should save positif money in account', async () => {
+        // Arrange
+        const inputId = 1;
+        const inputMoney = Number(200);
+        spyOn(accountService, 'saveMoney').and.returnValue(Promise.resolve(accountMock));
+
+         // Act
+         const output: any = await accountService.saveMoney(inputId, inputMoney);
+
+         // Assert
+         expect(output.id).toBeDefined();
+    });
 });
