@@ -41,4 +41,15 @@ describe('Account Creation', () => {
         // Assert
         expect(output).toBeInstanceOf(Array);
     });
+
+    it('Should check if money is not négatif or null', async () => {
+        // Arrange
+        const input = Number(-56666);
+
+        // Act
+        const output: any = await accountService.canIncreaseSolde(input);
+
+        // Assert
+        expect(output).toEqual(true);
+    });
 });

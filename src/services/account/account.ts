@@ -23,4 +23,8 @@ export class AccountService {
     async getAllAccount(): Promise<Account[]> {
         return await getManager().getRepository(AccountEntity).find();
     }
+
+    canIncreaseSolde(money : Number){
+        return "";
+    }
 }
