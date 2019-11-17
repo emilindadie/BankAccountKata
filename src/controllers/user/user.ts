@@ -10,7 +10,7 @@ export class UserController {
     public UserController() {
         dotenv.config();
     }
-    public async creacteUser(req: Request, res: Response) {
+    public async createUser(req: Request, res: Response) {
         const userService = new UserService();
         const user = req.body;
         try {
