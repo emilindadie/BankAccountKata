@@ -42,7 +42,6 @@ export class UserController {
     public async getUserAccount(req: Request, res: Response) {
         const userService = new UserService();
         const userId = Number(req.params.id);
-
         try {
             const userAccountResponse: Account[] = await userService.getUserAccount(userId);
             res.send({

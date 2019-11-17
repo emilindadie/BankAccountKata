@@ -13,7 +13,7 @@ export class UserService {
         dotenv.config();
     }
     async checkIfEmailExist(email: string): Promise<boolean> {
-        const users = await getManager().getRepository(UserEntity).findOne({ email });
+        const users = await this.getUserByEmail(email);
         if (users) {
             return true;
         }
@@ -40,7 +40,7 @@ export class UserService {
         return false;
     }
     async logUser(email: string, password: string): Promise<User> {
-        const user = await getManager().getRepository(UserEntity).findOne({ email });
+        const user = await this.getUserByEmail(email);
         if (!user) {
             throw new Error('L\'email ou le mot de passe est incorrect!');
         }
@@ -54,5 +54,9 @@ export class UserService {
 
     async getUserAccount(userId: number): Promise<Account[]> {
         return await getManager().getRepository(AccountEntity).find({ where: { userId } });
+    }
+
+    async getUserByEmail(email: string): Promise<any> {
+        return await getManager().getRepository(UserEntity).findOne({ email });
     }
 }

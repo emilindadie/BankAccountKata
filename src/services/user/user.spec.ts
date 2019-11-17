@@ -42,6 +42,20 @@ describe('User registration', () => {
         expect(output.id).toBeDefined();
     });
 
+    it('Should not create user (email exist)', async () => {
+        // Arrange
+        const myUser = createUserDto;
+        spyOn(userService, 'checkIfEmailExist').and.returnValue(Promise.resolve(true));
+
+        // Act
+        try {
+            const output = await userService.createUser(myUser);
+        } catch (e) {
+            // Assert
+            expect(e).toBeInstanceOf(Error);
+        }
+    });
+
     it('Should compare password', async () => {
         // Arrange
         const password = 'toto';
@@ -67,5 +81,36 @@ describe('User registration', () => {
 
         // Assert
         expect(output.id).toBeDefined();
+    });
+
+    it('Should not log user (wrong email)', async () => {
+        // Arrange
+        const inputEmail = "toto";
+        const inputPassword = "toto";
+        spyOn(userService, 'getUserByEmail').and.returnValue(Promise.resolve(false));
+
+        // Act
+        try {
+            const output = await userService.logUser(inputEmail, inputPassword);
+        } catch (e) {
+            // Assert
+            expect(e).toBeInstanceOf(Error);
+        }
+    });
+
+    it('Should not log user (wrong email)', async () => {
+        // Arrange
+        const inputEmail = "toto";
+        const inputPassword = "toto";
+        spyOn(userService, 'getUserByEmail').and.returnValue(Promise.resolve(true));
+        spyOn(userService, 'comparePassword').and.returnValue(Promise.resolve(false));
+
+        // Act
+        try {
+            const output = await userService.logUser(inputEmail, inputPassword);
+        } catch (e) {
+            // Assert
+            expect(e).toBeInstanceOf(Error);
+        }
     });
 });

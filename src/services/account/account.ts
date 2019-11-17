@@ -40,7 +40,7 @@ export class AccountService {
         return await this.makeSaveMoney(account, money);
     }
 
-    async makeSaveMoney(account: any, money: number): Promise<any> {
+    async makeSaveMoney(account: any, money: number): Promise<Account> {
         account.solde += money;
         return await account.save();
     }

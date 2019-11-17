@@ -34,4 +34,16 @@ export class AccountController {
             res.send({ error: e.message });
         }
     }
+
+    public async receiveMoney(req: Request, res: Response) {
+        const accountService = new AccountService();
+        const accountId = Number(req.params.id);
+        const money = Number(req.body['money']);
+        try {
+            const saveMoneyResponse = await accountService.getMoney(accountId, money);
+            res.send({ data: saveMoneyResponse });
+        } catch (e) {
+            res.send({ error: e.message });
+        }
+    }
 }
