@@ -33,7 +33,7 @@ describe('Account Creation', () => {
 
     it('Should get all account', async () => {
         // Arrange
-        spyOn(accountService, 'getAllAccount').and.returnValue(Promise.resolve(""));
+        spyOn(accountService, 'getAllAccount').and.returnValue(Promise.resolve(allAccountMock));
 
         // Act
         const output: any = await accountService.getAllAccount();

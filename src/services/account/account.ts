@@ -20,7 +20,7 @@ export class AccountService {
         return await getManager().getRepository(AccountEntity).save(createAccountDto);
     }
 
-    async getAllAccount(): Promise<any> {
-        return '';
+    async getAllAccount(): Promise<Account[]> {
+        return await getManager().getRepository(AccountEntity).find();
     }
 }
