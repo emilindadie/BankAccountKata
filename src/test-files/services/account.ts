@@ -16,3 +16,18 @@ export const accountMock: Account = {
         accounts: [],
     },
 };
+
+export const allAccountMock: Account [] = [
+    {
+        id : 1,
+        name: 'Compte A',
+        solde: 0,
+        user: {
+            id: 1,
+            name: 'toto',
+            email: 'dadie.emilin@gmail.com',
+            address: '14 rue de Mulhouse',
+            accounts: [],
+        },
+    },
+];

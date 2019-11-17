@@ -2,7 +2,6 @@ import { AccountEntity } from '../../entity/account';
 import { getManager } from 'typeorm';
 import { CreateAccountDto } from '../../model/account/account';
 import { Account } from 'src/model/account/account.i';
-import { createUserDto } from 'src/test-files';
 
 export class AccountService {
 
@@ -19,5 +18,9 @@ export class AccountService {
             throw new Error('Le compte doit avoir un nom!');
         }
         return await getManager().getRepository(AccountEntity).save(createAccountDto);
+    }
+
+    async getAllAccount(): Promise<any> {
+        return '';
     }
 }

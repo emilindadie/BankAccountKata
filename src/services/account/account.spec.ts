@@ -1,5 +1,5 @@
 import { AccountService } from './account';
-import { createAccountDto, accountMock} from '../../test-files';
+import { createAccountDto, accountMock, allAccountMock} from '../../test-files';
 
 describe('Account Creation', () => {
 
@@ -29,5 +29,16 @@ describe('Account Creation', () => {
 
         // Assert
         expect(output.id).toBeDefined();
+    });
+
+    it('Should get all account', async () => {
+        // Arrange
+        spyOn(accountService, 'getAllAccount').and.returnValue(Promise.resolve(""));
+
+        // Act
+        const output: any = await accountService.getAllAccount();
+
+        // Assert
+        expect(output).toBeInstanceOf(Array);
     });
 });
