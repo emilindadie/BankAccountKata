@@ -107,8 +107,12 @@ describe('Account Creation', () => {
         const inputId = 1;
         const inputMoney = Number(300);
         // Act
-        const output: any = await accountService.getMoney(inputId, inputMoney);
-        // Assert
-        expect(output).toBeInstanceOf(Error);
+        try {
+            // Act
+            const output: any = await accountService.getMoney(inputId, inputMoney);
+        } catch (e) {
+            // Assert
+            expect(e).toBeInstanceOf(Error);
+        }
     });
 });

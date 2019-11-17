@@ -46,8 +46,22 @@ export class AccountService {
         return await account.save();
     }
 
-    async getMoney(accountId: number, money: number){
-        return "";
+    async getMoney(accountId: number, money: number): Promise<Account> {
+        const canGet = this.verifyMoney(money);
+        if (!canGet) {
+            throw new Error('Money négatif ou null');
+        }
+        const account = await this.getAccountById(accountId);
+        if(account.solde < money){
+            throw new Error('Vous n\'avez pas assez d\'argent sur votre compte!');
+        }
+        return await this.makeGetMoney(accountId, money);
+    }
+
+    async makeGetMoney(accountId: number, money: number): Promise<Account> {
+        const account = await this.getAccountById(accountId);
+        account.solde += money;
+        return await account.save();
     }
 
     async getAccountById(id: number){
