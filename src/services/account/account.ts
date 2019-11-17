@@ -36,11 +36,11 @@ export class AccountService {
         if (!canSave) {
             throw new Error('Money négatif ou null');
         }
-        return await this.makeSaveMoney(accountId, money);
+        const account = await this.getAccountById(accountId);
+        return await this.makeSaveMoney(account, money);
     }
 
-    async makeSaveMoney(accountId: number, money: number): Promise<Account> {
-        const account = await this.getAccountById(accountId);
+    async makeSaveMoney(account: any, money: number): Promise<any> {
         account.solde += money;
         return await account.save();
     }
@@ -54,16 +54,19 @@ export class AccountService {
         if (account.solde < money) {
             throw new Error('Vous n\'avez pas assez d\'argent sur votre compte!');
         }
-        return await this.makeGetMoney(accountId, money);
+        return await this.makeGetMoney(account, money);
     }
 
-    async makeGetMoney(accountId: number, money: number): Promise<Account> {
-        const account = await this.getAccountById(accountId);
+    async makeGetMoney(account: any, money: number): Promise<Account> {
         account.solde += money;
         return await account.save();
     }
 
-    async getAccountById(id: number) {
+    async getAccountById(id: number): Promise<Account> {
         return await getManager().getRepository(AccountEntity).findOne({ id });
+    }
+
+    async updateAccount(account: AccountEntity): Promise<Account> {
+        return await getManager().getRepository(AccountEntity).save(AccountEntity);
     }
 }

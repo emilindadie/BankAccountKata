@@ -5,7 +5,7 @@ export const createAccountDto = new CreateAccountDto();
 createAccountDto.name = 'Compte A';
 
 export const accountMock: Account = {
-    id : 1,
+    id: 1,
     name: 'Compte A',
     solde: 0,
     user: {
@@ -17,9 +17,9 @@ export const accountMock: Account = {
     },
 };
 
-export const allAccountMock: Account [] = [
+export const allAccountMock: Account[] = [
     {
-        id : 1,
+        id: 1,
         name: 'Compte A',
         solde: 0,
         user: {

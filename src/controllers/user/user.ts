@@ -15,9 +15,9 @@ export class UserController {
         const user = req.body;
         try {
             const createUserResponse = await userService.createUser(user);
-            res.send({data : createUserResponse });
+            res.send({ data: createUserResponse });
         } catch (e) {
-            res.send({error : e.message });
+            res.send({ error: e.message });
         }
     }
     public async logUser(req: Request, res: Response) {
@@ -27,7 +27,7 @@ export class UserController {
         try {
             const logUserResponse: User = await userService.logUser(email, password);
             const payload = { id: logUserResponse.id };
-            const jwtOptions: SignOptions = { expiresIn: process.env.EXPIREIN};
+            const jwtOptions: SignOptions = { expiresIn: process.env.EXPIREIN };
             res.send({
                 data: {
                     access_token: jwt.sign(payload, process.env.JWTSECRET, jwtOptions),
@@ -35,7 +35,7 @@ export class UserController {
                 },
             });
         } catch (e) {
-            res.send({error: e.message });
+            res.send({ error: e.message });
         }
     }
 
@@ -49,11 +49,11 @@ export class UserController {
                 data: userAccountResponse,
             });
         } catch (e) {
-            res.send({error: e.message });
+            res.send({ error: e.message });
         }
     }
 
     public async protectedRoute(req: Request, res: Response) {
-        res.send({data: 'Welcome to the protected route' });
+        res.send({ data: 'Welcome to the protected route' });
     }
 }
