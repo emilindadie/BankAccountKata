@@ -1,19 +1,12 @@
 import { UserController } from '../../controllers/user/user';
-import { RequestHandler } from 'express';
-import * as passport from 'passport';
+import { BaseRoute } from '../base/base';
 
-export class UserRoute {
+export class UserRoute extends BaseRoute {
     public userController: UserController = new UserController();
     public routes(app): void {
         app.route('/user').post(this.userController.creacteUser);
         app.route('/user').get(this.userController.logUser);
-        app.route('/user/:id/account').get(this.protectedRoute(), this.userController.getUserAccount);
-        app.route('/user/protected').get(this.protectedRoute(), this.userController.protectedRoute);
-    }
-    private protectedRoute() {
-        const jwtAuth: RequestHandler = passport.authenticate('jwt', {
-            session: false,
-        });
-        return jwtAuth;
+        app.route('/user/:id/account').get(super.protectedRoute(), this.userController.getUserAccount);
+        app.route('/user/protected').get(super.protectedRoute(), this.userController.protectedRoute);
     }
 }
