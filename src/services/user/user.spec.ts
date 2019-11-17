@@ -85,8 +85,8 @@ describe('User registration', () => {
 
     it('Should not log user (wrong email)', async () => {
         // Arrange
-        const inputEmail = "toto";
-        const inputPassword = "toto";
+        const inputEmail = 'dadie.emilin@gmail.com';
+        const inputPassword = 'toto';
         spyOn(userService, 'getUserByEmail').and.returnValue(Promise.resolve(false));
 
         // Act
@@ -100,8 +100,8 @@ describe('User registration', () => {
 
     it('Should not log user (wrong email)', async () => {
         // Arrange
-        const inputEmail = "toto";
-        const inputPassword = "toto";
+        const inputEmail = 'dadie.emilin@gmail.com';
+        const inputPassword = 'toto';
         spyOn(userService, 'getUserByEmail').and.returnValue(Promise.resolve(true));
         spyOn(userService, 'comparePassword').and.returnValue(Promise.resolve(false));
 
