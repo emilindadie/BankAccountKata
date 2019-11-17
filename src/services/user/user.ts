@@ -1,4 +1,4 @@
-import {getManager} from 'typeorm';
+import { getManager } from 'typeorm';
 import { UserEntity } from '../../entity/user';
 import { CreateUserDto } from '../../model/user/user';
 import { User } from '../../model/user/user.i';
@@ -13,11 +13,11 @@ export class UserService {
         dotenv.config();
     }
     async checkIfEmailExist(email: string): Promise<boolean> {
-       const users = await getManager().getRepository(UserEntity).findOne({email});
-       if (users) {
-           return true;
-       }
-       return false;
+        const users = await getManager().getRepository(UserEntity).findOne({ email });
+        if (users) {
+            return true;
+        }
+        return false;
     }
     async createUser(createUserDto: CreateUserDto): Promise<User> {
         const emailExist = await this.checkIfEmailExist(createUserDto.email);
@@ -40,7 +40,7 @@ export class UserService {
         return false;
     }
     async logUser(email: string, password: string): Promise<User> {
-        const user = await getManager().getRepository(UserEntity).findOne({email});
+        const user = await getManager().getRepository(UserEntity).findOne({ email });
         if (!user) {
             throw new Error('L\'email ou le mot de passe est incorrect!');
         }
@@ -53,6 +53,6 @@ export class UserService {
     }
 
     async getUserAccount(userId: number): Promise<Account[]> {
-     return await getManager().getRepository(AccountEntity).find({ where: { userId } });
+        return await getManager().getRepository(AccountEntity).find({ where: { userId } });
     }
 }

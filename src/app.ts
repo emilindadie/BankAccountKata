@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as path from 'path';
 import 'reflect-metadata';
-import {createConnection} from 'typeorm';
+import { createConnection } from 'typeorm';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import { UserEntity } from 'src/entity/user';

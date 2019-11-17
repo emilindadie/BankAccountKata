@@ -1,5 +1,5 @@
 import { UserService } from './user';
-import {createUserDto, userMock} from '../../test-files/index';
+import { createUserDto, userMock } from '../../test-files/index';
 
 describe('User registration', () => {
     let userService: UserService;
@@ -68,4 +68,4 @@ describe('User registration', () => {
         // Assert
         expect(output.id).toBeDefined();
     });
-  });
+});

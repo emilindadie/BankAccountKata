@@ -2,7 +2,6 @@ import { AccountEntity } from '../../entity/account';
 import { getManager } from 'typeorm';
 import { CreateAccountDto } from '../../model/account/account';
 import { Account } from '../../model/account/account.i';
-import { User } from 'dist/model/user/user.i';
 
 export class AccountService {
 
@@ -52,7 +51,7 @@ export class AccountService {
             throw new Error('Money négatif ou null');
         }
         const account = await this.getAccountById(accountId);
-        if(account.solde < money){
+        if (account.solde < money) {
             throw new Error('Vous n\'avez pas assez d\'argent sur votre compte!');
         }
         return await this.makeGetMoney(accountId, money);
@@ -64,7 +63,7 @@ export class AccountService {
         return await account.save();
     }
 
-    async getAccountById(id: number){
-        return await getManager().getRepository(AccountEntity).findOne({id: id});
+    async getAccountById(id: number) {
+        return await getManager().getRepository(AccountEntity).findOne({ id: id });
     }
 }
