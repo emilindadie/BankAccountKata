@@ -25,7 +25,7 @@ export class AccountService {
         return await getManager().getRepository(AccountEntity).find();
     }
 
-    canIncreaseSolde(money: number) {
+    verifyMoney(money: number) {
         if (money > 0 && money != null) {
             return true;
         }
@@ -33,7 +33,7 @@ export class AccountService {
     }
 
     async saveMoney(accountId: number, money: number): Promise<Account> {
-        const canSave = this.canIncreaseSolde(money);
+        const canSave = this.verifyMoney(money);
         if (!canSave) {
             throw new Error('Money négatif ou null');
         }
@@ -41,8 +41,16 @@ export class AccountService {
     }
 
     async makeSaveMoney(accountId: number, money: number): Promise<Account> {
-        const account =  await getManager().getRepository(AccountEntity).findOne({id: accountId});
+        const account = await this.getAccountById(accountId);
         account.solde += money;
         return await account.save();
+    }
+
+    async getMoney(accountId: number, money: number){
+        return "";
+    }
+
+    async getAccountById(id: number){
+        return await getManager().getRepository(AccountEntity).findOne({id: id});
     }
 }

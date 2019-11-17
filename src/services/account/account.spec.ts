@@ -47,7 +47,7 @@ describe('Account Creation', () => {
         const input = Number(-56666);
 
         // Act
-        const output: any = await accountService.canIncreaseSolde(input);
+        const output: any = await accountService.verifyMoney(input);
 
         // Assert
         expect(output).toEqual(false);
@@ -58,7 +58,7 @@ describe('Account Creation', () => {
         const input = null;
 
         // Act
-        const output: any = await accountService.canIncreaseSolde(input);
+        const output: any = await accountService.verifyMoney(input);
 
         // Assert
         expect(output).toEqual(false);
@@ -69,7 +69,7 @@ describe('Account Creation', () => {
         const input = 500;
 
         // Act
-        const output: any = await accountService.canIncreaseSolde(input);
+        const output: any = await accountService.verifyMoney(input);
 
         // Assert
         expect(output).toEqual(true);
@@ -94,10 +94,21 @@ describe('Account Creation', () => {
         const inputMoney = Number(200);
         spyOn(accountService, 'saveMoney').and.returnValue(Promise.resolve(accountMock));
 
-         // Act
-         const output: any = await accountService.saveMoney(inputId, inputMoney);
+        // Act
+        const output: any = await accountService.saveMoney(inputId, inputMoney);
 
-         // Assert
-         expect(output.id).toBeDefined();
+        // Assert
+        expect(output.id).toBeDefined();
+    });
+
+
+    it('Should not get negatif or null money from account', async () => {
+        // Arrange
+        const inputId = 1;
+        const inputMoney = Number(300);
+        // Act
+        const output: any = await accountService.getMoney(inputId, inputMoney);
+        // Assert
+        expect(output).toBeInstanceOf(Error);
     });
 });
