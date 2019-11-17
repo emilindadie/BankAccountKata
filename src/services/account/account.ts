@@ -24,7 +24,10 @@ export class AccountService {
         return await getManager().getRepository(AccountEntity).find();
     }
 
-    canIncreaseSolde(money : Number){
-        return "";
+    canIncreaseSolde(money: number) {
+        if (money > 0 && money != null) {
+            return true;
+        }
+        return false;
     }
 }
