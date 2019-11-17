@@ -6,6 +6,7 @@ export class AccountRoute {
     public accountController: AccountController = new AccountController();
     public routes(app): void {
         app.route('/account').post(this.protectedRoute(), this.accountController.creacteAccount);
+        app.route('/account').get(this.protectedRoute(), this.accountController.getAllAccount);
     }
     private protectedRoute() {
         const jwtAuth: RequestHandler = passport.authenticate('jwt', {

@@ -12,4 +12,14 @@ export class AccountController {
             res.send({error : e.message });
         }
     }
+
+    public async getAllAccount(req: Request, res: Response) {
+        const accountService = new AccountService();
+        try {
+            const getAllAccountResponse = await accountService.getAllAccount();
+            res.send({data : getAllAccountResponse });
+        } catch (e) {
+            res.send({error : e.message });
+        }
+    }
 }

@@ -1,7 +1,7 @@
 import { AccountEntity } from '../../entity/account';
 import { getManager } from 'typeorm';
 import { CreateAccountDto } from '../../model/account/account';
-import { Account } from 'src/model/account/account.i';
+import { Account } from '../../model/account/account.i';
 
 export class AccountService {
 
