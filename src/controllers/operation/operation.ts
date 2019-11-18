@@ -20,4 +20,17 @@ export class OperationController {
             res.send({ error: e.message });
         }
     }
+
+    public async getOperationByAccountId(req: Request, res: Response) {
+        const operationService = new OperationService();
+        const accountId = Number(req.params.id);
+        try {
+            const operationByAccounrIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId);
+            res.send({
+                data: operationByAccounrIdResponse,
+            });
+        } catch (e) {
+            res.send({ error: e.message });
+        }
+    }
 }

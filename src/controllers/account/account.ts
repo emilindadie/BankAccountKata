@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { OperationService } from 'src/services/operation/operation';
 import { operationType } from 'src/type/operation';
 import { CreateOperationDto } from 'src/model/operation/operation';
+import { Account } from 'src/model/account/account.i';
 
 export class AccountController {
     public async creacteAccount(req: Request, res: Response) {
@@ -44,6 +45,19 @@ export class AccountController {
             } catch (e) {
                 res.send({ error: e.message });
             }
+        } catch (e) {
+            res.send({ error: e.message });
+        }
+    }
+
+    public async getAccountByUserId(req: Request, res: Response) {
+        const accountService = new AccountService();
+        const userId = Number(req.params.id);
+        try {
+            const userAccountResponse: Account[] = await accountService.getAccountByUserId(userId);
+            res.send({
+                data: userAccountResponse,
+            });
         } catch (e) {
             res.send({ error: e.message });
         }

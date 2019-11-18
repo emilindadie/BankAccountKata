@@ -25,9 +25,11 @@ describe('Get operation', () => {
     it('Should get all operation of one account', async () => {
         // Arrange
         const inputId = 1;
+        const myOperationMock = operationMock;
+        spyOn(operationService, 'getOperationByAccountId').and.returnValue(Promise.resolve([myOperationMock]));
 
         // Act
-        const output: any = await operationService.getOperationbByAccountId(inputId);
+        const output: any = await operationService.getOperationByAccountId(inputId);
 
         // Assert
         expect(output).toBeInstanceOf(Array);

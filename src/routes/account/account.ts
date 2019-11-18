@@ -6,6 +6,6 @@ export class AccountRoute extends BaseRoute {
     public routes(app): void {
         app.route('/account').post(super.protectedRoute(), this.accountController.creacteAccount);
         app.route('/account/:id').post(super.protectedRoute(), this.accountController.updateSolde);
-        app.route('/account').get(super.protectedRoute(), this.accountController.getAllAccount);
+        app.route('/:id/account').get(super.protectedRoute(), this.accountController.getAccountByUserId);
     }
 }

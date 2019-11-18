@@ -11,7 +11,7 @@ export class OperationService {
         return await getManager().getRepository(OperationEntity).findOne({ id });
     }
 
-    getOperationbByAccountId(id: number) {
-        return '';
+    async getOperationByAccountId(accountId: number) {
+        return await getManager().getRepository(OperationEntity).find({ where: { accountId } });
     }
 }

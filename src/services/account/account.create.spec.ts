@@ -1,5 +1,5 @@
 import { AccountService } from './account';
-import { createAccountDto, accountMock, allAccountMock } from '../../test-files';
+import { createAccountDto, accountMock } from '../../test-files';
 
 describe('Create account', () => {
 

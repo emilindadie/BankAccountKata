@@ -44,4 +44,8 @@ export class AccountService {
     async updateAccount(account: AccountEntity): Promise<Account> {
         return await getManager().getRepository(AccountEntity).save(AccountEntity);
     }
+
+    async getAccountByUserId(userId: number): Promise<Account[]> {
+        return await getManager().getRepository(AccountEntity).find({ where: { userId } });
+    }
 }

@@ -52,10 +52,6 @@ export class UserService {
         throw new Error('L\'email ou le mot de passe est incorrect!');
     }
 
-    async getUserAccount(userId: number): Promise<Account[]> {
-        return await getManager().getRepository(AccountEntity).find({ where: { userId } });
-    }
-
     async getUserByEmail(email: string): Promise<any> {
         return await getManager().getRepository(UserEntity).findOne({ email });
     }
