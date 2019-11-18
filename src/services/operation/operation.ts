@@ -13,4 +13,8 @@ export class OperationService {
     async createDepositOperation(createDepositDto: CreateDepositDto) {
         return await getManager().getRepository(DepositeEntity).save(createDepositDto);
     }
+
+    getOperationById(id: number) {
+        return '';
+    }
 }
