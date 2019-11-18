@@ -10,4 +10,8 @@ export class OperationService {
     async getOperationById(id: number) {
         return await getManager().getRepository(OperationEntity).findOne({ id });
     }
+
+    getOperationbByAccountId(id: number) {
+        return '';
+    }
 }
