@@ -1,5 +1,8 @@
 import { AccountService } from 'src/services/account/account';
 import { Request, Response } from 'express';
+import { OperationService } from 'src/services/operation/operation';
+import { operationType } from 'src/type/operation';
+import { CreateOperationDto } from 'src/model/operation/operation';
 
 export class AccountController {
     public async creacteAccount(req: Request, res: Response) {
@@ -23,25 +26,24 @@ export class AccountController {
         }
     }
 
-    public async saveMoney(req: Request, res: Response) {
+    public async updateSolde(req: Request, res: Response) {
         const accountService = new AccountService();
+        const operationService = new OperationService();
         const accountId = Number(req.params.id);
-        const money = Number(req.body['amount']);
+        const amount = Number(req.body['amount']);
         try {
-            const saveMoneyResponse = await accountService.saveMoney(accountId, money);
-            res.send({ data: saveMoneyResponse });
-        } catch (e) {
-            res.send({ error: e.message });
-        }
-    }
-
-    public async receiveMoney(req: Request, res: Response) {
-        const accountService = new AccountService();
-        const accountId = Number(req.params.id);
-        const money = Number(req.body['amount']);
-        try {
-            const saveMoneyResponse = await accountService.getMoney(accountId, money);
-            res.send({ data: saveMoneyResponse });
+            const updateSoldeResponse = await accountService.updateSolde(accountId, amount);
+            const operation = new CreateOperationDto();
+            operation.account = updateSoldeResponse;
+            operation.amount = amount;
+            operation.type = amount > 0 ? operationType.withdraw : operationType.deposit;
+            operation.date = new Date();
+            try {
+                const createOperationResponse = await operationService.createOperation(operation);
+                res.send({ data: createOperationResponse });
+            } catch (e) {
+                res.send({ error: e.message });
+            }
         } catch (e) {
             res.send({ error: e.message });
         }

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, JoinColumn, ManyToOne } from 'typeorm';
 import { AccountEntity } from '../account/account';
 @Entity()
 export class OperationEntity extends BaseEntity {
@@ -10,6 +10,7 @@ export class OperationEntity extends BaseEntity {
     amount: number;
     @Column()
     date: Date;
-    @OneToOne(type => AccountEntity, account => account.operations)
+    @ManyToOne(type => AccountEntity)
+    @JoinColumn()
     account: AccountEntity;
 }

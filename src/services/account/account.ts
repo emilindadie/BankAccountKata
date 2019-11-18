@@ -24,41 +24,16 @@ export class AccountService {
         return await getManager().getRepository(AccountEntity).find();
     }
 
-    verifyMoney(money: number) {
-        if (money > 0 && money != null) {
-            return true;
-        }
-        return false;
-    }
-
-    async saveMoney(accountId: number, money: number): Promise<Account> {
-        const canSave = this.verifyMoney(money);
-        if (!canSave) {
-            throw new Error('Money négatif ou null');
-        }
+    async updateSolde(accountId: number, amount: number): Promise<Account> {
         const account = await this.getAccountById(accountId);
-        return await this.makeSaveMoney(account, money);
+        return await this.makeUpdateMoney(account, amount);
     }
 
-    async makeSaveMoney(account: any, money: number): Promise<Account> {
-        account.solde += money;
-        return await account.save();
-    }
-
-    async getMoney(accountId: number, money: number): Promise<Account> {
-        const canGet = this.verifyMoney(money);
-        if (!canGet) {
-            throw new Error('Money négatif ou null');
+    async makeUpdateMoney(account: any, amount: number): Promise<Account> {
+        account.solde += amount;
+        if (account.solde < 0) {
+            throw new Error('Votre solde est insuffisant!');
         }
-        const account = await this.getAccountById(accountId);
-        if (account.solde < money) {
-            throw new Error('Vous n\'avez pas assez d\'argent sur votre compte!');
-        }
-        return await this.makeGetMoney(account, money);
-    }
-
-    async makeGetMoney(account: any, money: number): Promise<Account> {
-        account.solde += money;
         return await account.save();
     }
 

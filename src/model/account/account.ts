@@ -1,6 +1,6 @@
-import { User } from '../user/user.i';
+import { CreateUserDto } from 'dist/model/user/user';
 
 export class CreateAccountDto {
     name: string;
-    user: User;
+    user: CreateUserDto;
 }

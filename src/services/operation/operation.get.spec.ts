@@ -1,4 +1,4 @@
-import { createWithDrawDto, createDepositDto, withdrawMock, depositMock } from '../../test-files/services/operation';
+import { createOperationDto, operationMock } from '../../test-files/services/operation';
 import { OperationService } from './operation';
 
 describe('Get operation', () => {
@@ -11,8 +11,8 @@ describe('Get operation', () => {
     it('Should get one operation', async () => {
         // Arrange
         const inputId = 1;
-        const myWithDrawMock = withdrawMock;
-        spyOn(operationService, 'getOperationById').and.returnValue(Promise.resolve(myWithDrawMock));
+        const myOperationMock = operationMock;
+        spyOn(operationService, 'getOperationById').and.returnValue(Promise.resolve(myOperationMock));
 
         // Act
         const output: any = await operationService.getOperationById(inputId);

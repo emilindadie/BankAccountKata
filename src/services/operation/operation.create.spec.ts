@@ -1,4 +1,4 @@
-import { createWithDrawDto, createDepositDto, withdrawMock, depositMock } from '../../test-files/services/operation';
+import { createOperationDto, operationMock } from '../../test-files/services/operation';
 import { OperationService } from './operation';
 
 describe('Create operation', () => {
@@ -8,27 +8,14 @@ describe('Create operation', () => {
         operationService = new OperationService();
     });
 
-    it('Should create withdraw operation', async () => {
+    it('Should create operation', async () => {
         // Arrange
-        const inputWithDrawOperation = createWithDrawDto;
-        const myWithDrawMock = withdrawMock;
-        spyOn(operationService, 'createWithDrawOperation').and.returnValue(Promise.resolve(myWithDrawMock));
+        const inputOperation = createOperationDto;
+        const myOperationMock = operationMock;
+        spyOn(operationService, 'createOperation').and.returnValue(Promise.resolve(myOperationMock));
 
         // Act
-        const output: any = await operationService.createWithDrawOperation(inputWithDrawOperation);
-
-        // Assert
-        expect(output.id).toBeDefined();
-    });
-
-    it('Should create deposit operation', async () => {
-        // Arrange
-        const inputDepositOperation = createDepositDto;
-        const myDepositMock = depositMock;
-        spyOn(operationService, 'createDepositOperation').and.returnValue(Promise.resolve(myDepositMock));
-
-        // Act
-        const output: any = await operationService.createDepositOperation(inputDepositOperation);
+        const output: any = await operationService.createOperation(inputOperation);
 
         // Assert
         expect(output.id).toBeDefined();

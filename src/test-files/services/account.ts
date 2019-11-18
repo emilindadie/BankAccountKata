@@ -7,7 +7,7 @@ createAccountDto.name = 'Compte A';
 export const accountMock: Account = {
     id: 1,
     name: 'Compte A',
-    solde: 0,
+    solde: 400,
     user: {
         id: 1,
         name: 'toto',
@@ -15,14 +15,13 @@ export const accountMock: Account = {
         address: '14 rue de Mulhouse',
         accounts: [],
     },
-    operations: [],
 };
 
 export const allAccountMock: Account[] = [
     {
         id: 1,
         name: 'Compte A',
-        solde: 0,
+        solde: 400,
         user: {
             id: 1,
             name: 'toto',
@@ -31,6 +30,5 @@ export const allAccountMock: Account[] = [
             accounts: [],
 
         },
-        operations: [],
     },
 ];

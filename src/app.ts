@@ -5,18 +5,21 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
-import { UserEntity } from 'src/entity/user';
+import { UserEntity } from 'src/entity/user/user';
 import { IndexRoute } from './routes/index/index';
 import { UserRoute } from './routes/user/user';
 import configurePassport from './config';
-import { AccountEntity } from './entity/account';
+import { AccountEntity } from './entity/account/account';
 import { AccountRoute } from './routes/account/account';
+import { OperationRoute } from './routes/operation/operation';
+import { OperationEntity } from './entity/operation/operation';
 
 class App {
   public app: express.Application;
   public indexRoutes: IndexRoute = new IndexRoute();
   public userRoutes: UserRoute = new UserRoute();
   public accountRoutes: AccountRoute = new AccountRoute();
+  public operationRoutes: OperationRoute = new OperationRoute();
 
   constructor() {
     this.app = express();
@@ -24,11 +27,13 @@ class App {
     this.indexRoutes.routes(this.app);
     this.userRoutes.routes(this.app);
     this.accountRoutes.routes(this.app);
+    this.operationRoutes.routes(this.app);
   }
   private config(): void {
     this.app.use(bodyParser.json());
     this.app.use(cookieParser()); // read cookies (needed for auth)
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser.json());
     configurePassport(this.app);
     this.app.set('views', path.join(__dirname, 'views'));
     this.app.set('view engine', 'ejs');
@@ -43,6 +48,7 @@ class App {
       entities: [
         UserEntity,
         AccountEntity,
+        OperationEntity,
       ],
       synchronize: true,
       logging: false,

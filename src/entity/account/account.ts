@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, ManyToOne, OneToMany } from 'typeorm';
 import { UserEntity } from '../user/user';
-import { OperationEntity } from '../operation/operation';
 
 @Entity()
 export class AccountEntity extends BaseEntity {
@@ -12,6 +11,4 @@ export class AccountEntity extends BaseEntity {
     solde: number;
     @ManyToOne(type => UserEntity, user => user.accounts)
     user: UserEntity;
-    @OneToMany(type => OperationEntity, operation => operation.account)
-    operations: OperationEntity[];
 }
