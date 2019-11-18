@@ -1,4 +1,4 @@
-import { CreateUserDto } from 'dist/model/user/user';
+import { CreateUserDto } from "../user/user";
 
 export class CreateAccountDto {
     name: string;
