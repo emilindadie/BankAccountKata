@@ -3,6 +3,7 @@ import { CreateDepositDto } from '../../model/operation/deposit';
 import { getManager } from 'typeorm';
 import { WithdrawEntity } from '../../entity/operation/withdraw';
 import { DepositeEntity } from '../../entity/operation/deposite';
+import { OperationEntity } from '../../entity/operation/operation';
 
 export class OperationService {
 
@@ -14,7 +15,7 @@ export class OperationService {
         return await getManager().getRepository(DepositeEntity).save(createDepositDto);
     }
 
-    getOperationById(id: number) {
-        return '';
+    async getOperationById(id: number) {
+        return await getManager().getRepository(OperationEntity).find({ id });
     }
 }
