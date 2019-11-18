@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, OneToMany } from 'typeorm';
-import { AccountEntity } from './account';
+import { AccountEntity } from '../account/account';
 @Entity()
 export class UserEntity extends BaseEntity {
     @PrimaryGeneratedColumn()

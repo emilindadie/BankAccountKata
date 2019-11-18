@@ -15,6 +15,7 @@ export const accountMock: Account = {
         address: '14 rue de Mulhouse',
         accounts: [],
     },
+    operations: [],
 };
 
 export const allAccountMock: Account[] = [
@@ -28,6 +29,8 @@ export const allAccountMock: Account[] = [
             email: 'dadie.emilin@gmail.com',
             address: '14 rue de Mulhouse',
             accounts: [],
+
         },
+        operations: [],
     },
 ];

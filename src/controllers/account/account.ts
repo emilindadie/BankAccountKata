@@ -26,7 +26,7 @@ export class AccountController {
     public async saveMoney(req: Request, res: Response) {
         const accountService = new AccountService();
         const accountId = Number(req.params.id);
-        const money = Number(req.body['money']);
+        const money = Number(req.body['amount']);
         try {
             const saveMoneyResponse = await accountService.saveMoney(accountId, money);
             res.send({ data: saveMoneyResponse });
@@ -38,7 +38,7 @@ export class AccountController {
     public async receiveMoney(req: Request, res: Response) {
         const accountService = new AccountService();
         const accountId = Number(req.params.id);
-        const money = Number(req.body['money']);
+        const money = Number(req.body['amount']);
         try {
             const saveMoneyResponse = await accountService.getMoney(accountId, money);
             res.send({ data: saveMoneyResponse });

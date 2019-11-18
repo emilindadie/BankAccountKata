@@ -1,4 +1,4 @@
-import { AccountEntity } from '../../entity/account';
+import { AccountEntity } from '../../entity/account/account';
 import { getManager } from 'typeorm';
 import { CreateAccountDto } from '../../model/account/account';
 import { Account } from '../../model/account/account.i';

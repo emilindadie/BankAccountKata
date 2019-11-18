@@ -1,10 +1,10 @@
 import { getManager } from 'typeorm';
-import { UserEntity } from '../../entity/user';
+import { UserEntity } from '../../entity/user/user';
 import { CreateUserDto } from '../../model/user/user';
 import { User } from '../../model/user/user.i';
 import * as bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
-import { AccountEntity } from '../../entity/account';
+import { AccountEntity } from '../../entity/account/account';
 import { Account } from '../../model/account/account.i';
 
 export class UserService {
