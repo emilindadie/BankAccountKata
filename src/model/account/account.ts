@@ -1,4 +1,4 @@
-import { CreateUserDto } from "../user/user";
+import { CreateUserDto } from '../user/user';
 
 export class CreateAccountDto {
     name: string;

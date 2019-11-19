@@ -1,5 +1,5 @@
 import { AccountService } from './account';
-import { accountMock } from '../../test-files';
+import { account, accountMock } from '../../test-files';
 
 describe('Deposit money', () => {
 
@@ -15,7 +15,7 @@ describe('Deposit money', () => {
         spyOn(accountService, 'updateSolde').and.returnValue(Promise.resolve(accountMock));
 
         // Act
-        const output: any = await accountService.updateSolde(inputId, inputMoney);
+        const output: any = await accountService.updateSolde(account, inputMoney);
 
         // Assert
         expect(output.id).toBeDefined();
@@ -28,7 +28,7 @@ describe('Deposit money', () => {
         spyOn(accountService, 'updateSolde').and.returnValue(Promise.resolve(accountMock));
 
         // Act
-        const output: any = await accountService.updateSolde(inputId, inputMoney);
+        const output: any = await accountService.updateSolde(account, inputMoney);
 
         // Assert
         expect(output.id).toBeDefined();
@@ -42,7 +42,7 @@ describe('Deposit money', () => {
 
         try {
             // Act
-            const output: any = await accountService.updateSolde(inputId, inputMoney);
+            const output: any = await accountService.updateSolde(account, inputMoney);
         } catch (e) {
             // Assert
             expect(e).toBeInstanceOf(Error);

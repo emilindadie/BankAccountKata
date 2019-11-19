@@ -24,12 +24,7 @@ export class AccountService {
         return await getManager().getRepository(AccountEntity).find();
     }
 
-    async updateSolde(accountId: number, amount: number): Promise<Account> {
-        const account = await this.getAccountById(accountId);
-        return await this.makeUpdateMoney(account, amount);
-    }
-
-    async makeUpdateMoney(account: any, amount: number): Promise<Account> {
+    async updateSolde(account: AccountEntity, amount: number): Promise<Account> {
         account.solde += amount;
         if (account.solde < 0) {
             throw new Error('Votre solde est insuffisant!');
@@ -37,7 +32,7 @@ export class AccountService {
         return await account.save();
     }
 
-    async getAccountById(id: number): Promise<Account> {
+    async getAccountById(id: number): Promise<any> {
         return await getManager().getRepository(AccountEntity).findOne({ id });
     }
 

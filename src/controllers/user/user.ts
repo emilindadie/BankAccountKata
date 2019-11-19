@@ -19,10 +19,11 @@ export class UserController {
             res.send({ error: e.message });
         }
     }
+
     public async logUser(req: Request, res: Response) {
         const userService = new UserService();
-        const email = req.query['email'];
-        const password = req.query['password'];
+        const email = req.body['email'];
+        const password = req.body['password'];
         try {
             const logUserResponse: User = await userService.logUser(email, password);
             const payload = { id: logUserResponse.id };

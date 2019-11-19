@@ -1,12 +1,13 @@
-import { createOperationDto, operationMock } from '../../test-files/services/operation';
+import { operationMock } from '../../test-files/services/operation';
 import { OperationService } from './operation';
 import { Operation } from '../../model/operation/operation.i';
+import { AccountService } from '../account/account';
 
 describe('Get operation', () => {
     let operationService: OperationService;
 
     beforeEach(() => {
-        operationService = new OperationService();
+        operationService = new OperationService(new AccountService());
     });
 
     it('Should get one operation', async () => {
