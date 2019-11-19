@@ -38,7 +38,7 @@ export class OperationController {
 
     public async getOperationByAccountId(req: Request, res: Response) {
         const operationService = new OperationService(new AccountService);
-        const accountId = Number(req.params.accountId);
+        const accountId = Number(req.query['accountId']);
         try {
             const operationByAccounrIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId);
             res.send({
