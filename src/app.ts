@@ -34,10 +34,31 @@ class App {
     this.app.use(cookieParser()); // read cookies (needed for auth)
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
+    dotenv.config();
+    this.connectionConfig();
+    this.corsConfig();
     configurePassport(this.app);
+    this.viewConfig();
+  }
+
+  private viewConfig(): void {
     this.app.set('views', path.join(__dirname, 'views'));
     this.app.set('view engine', 'ejs');
-    dotenv.config();
+  }
+
+  private corsConfig(): void {
+    this.app.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+      next();
+      this.app.options('*', (req, res) => {
+        res.header('Access-Control-Allow-Methods', 'GET, PATCH, PUT, POST, DELETE, OPTIONS');
+        res.send();
+      });
+    });
+  }
+
+  private connectionConfig(): void {
     createConnection({
       type: 'mysql',
       host: process.env.HOST,
