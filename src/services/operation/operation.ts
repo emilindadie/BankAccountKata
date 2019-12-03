@@ -1,4 +1,4 @@
-import { getManager, MoreThan, Equal, Between } from 'typeorm';
+import { getManager, Between } from 'typeorm';
 import { OperationEntity } from '../../entity/operation/operation';
 import { AccountService } from '../account/account';
 import { CreateOperationDto } from '../../model/operation/operation';
