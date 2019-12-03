@@ -29,11 +29,12 @@ export class OperationService {
     }
 
     async getOperationByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date) {
+        console.log(localDate);
         if (startDate && endDate) {
             return await getManager().getRepository(OperationEntity).find({ where: { accountId, date: Between(startDate, endDate) } });
         }
-        const start = new Date(localDate.getFullYear(), localDate.getMonth(), 1);
-        const end = new Date(localDate.getFullYear(), localDate.getMonth() + 1, 0);
+        const start = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth(), 1);
+        const end = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth() + 1, 0);
         return await getManager().getRepository(OperationEntity).find({ where: { accountId, date: Between(start, end) } });
     }
 }
