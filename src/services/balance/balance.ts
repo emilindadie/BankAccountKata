@@ -1,7 +1,16 @@
+import { OperationService } from '../operation/operation';
+import { Operation } from 'src/model/operation/operation.i';
 
 export class BalanceService {
 
-    async getBalanceByAccountId(accountId: number, startDate?: Date, endDate?: Date) {
-        return '';
+    operationService: OperationService;
+    constructor(operationService: OperationService) {
+        this.operationService = operationService;
+    }
+
+    async getBalanceByAccountId(accountId: number, startDate?: Date, endDate?: Date): Promise<number> {
+        const operations: Operation[] = await this.operationService.getOperationByAccountId(accountId, startDate, endDate);
+        const balance = (operations.map(operation => operation.amount).reduce((a, b) => a + b));
+        return balance;
     }
 }
