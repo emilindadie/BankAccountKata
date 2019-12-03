@@ -15,7 +15,7 @@ export class AccountService {
     async createAccount(createAccountDto: CreateAccountDto): Promise<Account> {
         const haveName = await this.haveName(createAccountDto.name);
         if (!haveName) {
-            throw new Error('Le compte doit avoir un nom!');
+            throw new Error('Account should have a name!');
         }
         return await getManager().getRepository(AccountEntity).save(createAccountDto);
     }
@@ -27,7 +27,7 @@ export class AccountService {
     async updateSolde(account: AccountEntity, amount: number): Promise<Account> {
         account.solde += amount;
         if (account.solde < 0) {
-            throw new Error('Votre solde est insuffisant!');
+            throw new Error('insufficient balance!');
         }
         return await account.save();
     }

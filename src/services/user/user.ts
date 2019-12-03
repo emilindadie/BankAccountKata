@@ -22,7 +22,7 @@ export class UserService {
     async createUser(createUserDto: CreateUserDto): Promise<User> {
         const emailExist = await this.checkIfEmailExist(createUserDto.email);
         if (emailExist) {
-            throw new Error('L\'email existe deja!');
+            throw new Error('Email already exist!');
         }
         createUserDto.password = await this.cryptPassword(createUserDto.password);
         const createUserResponse = await getManager().getRepository(UserEntity).save(createUserDto);
@@ -42,14 +42,14 @@ export class UserService {
     async logUser(email: string, password: string): Promise<User> {
         const user = await this.getUserByEmail(email);
         if (!user) {
-            throw new Error('L\'email ou le mot de passe est incorrect!');
+            throw new Error('Email or password is wrong!');
         }
         const canLogin = await this.comparePassword(password, user.password);
         if (canLogin) {
             delete user.password;
             return user;
         }
-        throw new Error('L\'email ou le mot de passe est incorrect!');
+        throw new Error('Email or password is wrong!');
     }
 
     async getUserByEmail(email: string): Promise<any> {
