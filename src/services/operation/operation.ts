@@ -12,14 +12,14 @@ export class OperationService {
     }
     async createOperation(accountId: number, amount: number) {
         const account = await this.accountService.getAccountById(accountId);
-        const operation = new CreateOperationDto();
-        operation.account = account;
-        operation.amount = amount;
-        operation.type = amount > 0 ? operationType.deposit : operationType.withdraw;
-        operation.date = new Date();
-        const createOperation = await getManager().getRepository(OperationEntity).save(operation);
-        if (createOperation) {
-            await this.accountService.updateSolde(account, amount);
+        const updateSolde = await this.accountService.updateSolde(account, amount);
+        if (updateSolde) {
+            const operation = new CreateOperationDto();
+            operation.account = account;
+            operation.amount = amount;
+            operation.type = amount > 0 ? operationType.deposit : operationType.withdraw;
+            operation.date = new Date();
+            const createOperation = await getManager().getRepository(OperationEntity).save(operation);
             return createOperation;
         }
     }
@@ -29,7 +29,6 @@ export class OperationService {
     }
 
     async getOperationByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date) {
-        console.log(localDate);
         if (startDate && endDate) {
             return await getManager().getRepository(OperationEntity).find({ where: { accountId, date: Between(startDate, endDate) } });
         }
