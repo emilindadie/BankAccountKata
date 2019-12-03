@@ -30,10 +30,14 @@ export class OperationService {
 
     async getOperationByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date) {
         if (startDate && endDate) {
-            return await getManager().getRepository(OperationEntity).find({ where: { accountId, date: Between(startDate, endDate) } });
+            return await getManager().getRepository(OperationEntity)
+                .createQueryBuilder('operation_entity')
+                .where('operation_entity.accountId= :id', { id: accountId }).getMany();
         }
         const start = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth(), 1);
         const end = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth() + 1, 0);
-        return await getManager().getRepository(OperationEntity).find({ where: { accountId, date: Between(start, end) } });
+        return await getManager().getRepository(OperationEntity)
+            .createQueryBuilder('operation_entity')
+            .where('operation_entity.accountId= :id', { id: accountId }).getMany();
     }
 }

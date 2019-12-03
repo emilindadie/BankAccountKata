@@ -1,5 +1,5 @@
 import { AccountEntity } from '../../entity/account/account';
-import { getManager } from 'typeorm';
+import { getManager, SelectQueryBuilder } from 'typeorm';
 import { CreateAccountDto } from '../../model/account/account';
 import { Account } from '../../model/account/account.i';
 
@@ -41,6 +41,8 @@ export class AccountService {
     }
 
     async getAccountByUserId(userId: number): Promise<Account[]> {
-        return await getManager().getRepository(AccountEntity).find({ where: { userId } });
+        return await getManager().getRepository(AccountEntity)
+            .createQueryBuilder('account_entity')
+            .where('account_entity.userId= :id', { id: userId }).getMany();
     }
 }
