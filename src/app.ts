@@ -13,6 +13,7 @@ import { AccountEntity } from './entity/account/account';
 import { AccountRoute } from './routes/account/account';
 import { OperationRoute } from './routes/operation/operation';
 import { OperationEntity } from './entity/operation/operation';
+import { BalanceRoute } from './routes/balance/balance';
 
 class App {
   public app: express.Application;
@@ -20,6 +21,7 @@ class App {
   public userRoutes: UserRoute = new UserRoute();
   public accountRoutes: AccountRoute = new AccountRoute();
   public operationRoutes: OperationRoute = new OperationRoute();
+  public balanceRoutes: BalanceRoute = new BalanceRoute();
 
   constructor() {
     this.app = express();
@@ -28,7 +30,9 @@ class App {
     this.userRoutes.routes(this.app);
     this.accountRoutes.routes(this.app);
     this.operationRoutes.routes(this.app);
+    this.balanceRoutes.routes(this.app);
   }
+
   private config(): void {
     this.app.use(bodyParser.json());
     this.app.use(cookieParser()); // read cookies (needed for auth)

@@ -45,14 +45,14 @@ export class OperationController {
 
         try {
             if (startDate && endDate) {
-                const operationByAccounrIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
+                const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
                 res.send({
-                    data: operationByAccounrIdResponse,
+                    data: operationByAccountIdResponse,
                 });
             } else {
-                const operationByAccounrIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, localDate);
+                const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, localDate);
                 res.send({
-                    data: operationByAccounrIdResponse,
+                    data: operationByAccountIdResponse,
                 });
             }
         } catch (e) {

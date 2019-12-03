@@ -8,8 +8,8 @@ export class BalanceService {
         this.operationService = operationService;
     }
 
-    async getBalanceByAccountId(accountId: number, startDate?: Date, endDate?: Date): Promise<number> {
-        const operations: Operation[] = await this.operationService.getOperationByAccountId(accountId, startDate, endDate);
+    async getBalanceByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date): Promise<number> {
+        const operations: Operation[] = await this.operationService.getOperationByAccountId(accountId, startDate, endDate, localDate);
         const balance = (operations.map(operation => operation.amount).reduce((a, b) => a + b));
         return balance;
     }

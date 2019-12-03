@@ -1,9 +1,9 @@
-import { OperationController } from '../../controllers/operation/operation';
 import { BaseRoute } from '../base/base';
+import { BalanceController } from 'src/controllers/balance/balance';
 
 export class BalanceRoute extends BaseRoute {
-    public operationController: OperationController = new OperationController();
+    public balanceController: BalanceController = new BalanceController();
     public routes(app): void {
-        app.route('/balance').get(super.protectedRoute(), this.operationController.getOperationById);
+        app.route('/balance').get(super.protectedRoute(), this.balanceController.getBalanceByAccountId);
     }
 }
