@@ -1,4 +1,4 @@
-import { getManager } from 'typeorm';
+import { getManager, MoreThan, Equal, Between } from 'typeorm';
 import { OperationEntity } from '../../entity/operation/operation';
 import { AccountService } from '../account/account';
 import { CreateOperationDto } from '../../model/operation/operation';
@@ -28,7 +28,12 @@ export class OperationService {
         return await getManager().getRepository(OperationEntity).findOne({ id });
     }
 
-    async getOperationByAccountId(accountId: number) {
-        return await getManager().getRepository(OperationEntity).find({ where: { accountId } });
+    async getOperationByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date) {
+        if (startDate && endDate) {
+            return await getManager().getRepository(OperationEntity).find({ where: { accountId, date: Between(startDate, endDate) } });
+        }
+        const start = new Date(localDate.getFullYear(), localDate.getMonth(), 1);
+        const end = new Date(localDate.getFullYear(), localDate.getMonth() + 1, 0);
+        return await getManager().getRepository(OperationEntity).find({ where: { accountId, date: Between(start, end) } });
     }
 }

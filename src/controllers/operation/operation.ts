@@ -39,11 +39,22 @@ export class OperationController {
     public async getOperationByAccountId(req: Request, res: Response) {
         const operationService = new OperationService(new AccountService);
         const accountId = Number(req.query['accountId']);
+        const startDate = req.query['startDate'];
+        const endDate = req.query['endDate'];
+        const localDate = req.query['localDate'];
+
         try {
-            const operationByAccounrIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId);
-            res.send({
-                data: operationByAccounrIdResponse,
-            });
+            if (startDate && endDate) {
+                const operationByAccounrIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
+                res.send({
+                    data: operationByAccounrIdResponse,
+                });
+            } else {
+                const operationByAccounrIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, localDate);
+                res.send({
+                    data: operationByAccounrIdResponse,
+                });
+            }
         } catch (e) {
             res.send({ error: e.message });
         }
