@@ -26,7 +26,7 @@ Think of your personal bank account experience When in doubt, go for the simples
 
 # FrontEnd Dependance
 
-[BankAccountkataFront](../BankAccountKataFront/README.md)
+[BankAccountkataFront](https://github.com/emilindadie/BankAccountKataFront)
 
 
 # Run api
