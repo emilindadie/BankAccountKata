@@ -28,6 +28,21 @@ Think of your personal bank account experience When in doubt, go for the simples
 
 [BankAccountkataFront](https://github.com/emilindadie/BankAccountKataFront)
 
+# Configurations
+
+$ touch .env at root
+
+```sh
+echo "
+HOST=your_host
+PORT=your_port
+USERNAME=your_database_username
+PASSWORD=your_database_password
+DATABASE=your_database_name
+JWTSECRET=your_secret
+EXPIREIN=your_time (3h)
+" > .env
+```
 
 # Run api
 ```sh
