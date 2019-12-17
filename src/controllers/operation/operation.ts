@@ -45,10 +45,14 @@ export class OperationController {
 
         try {
             if (startDate && endDate) {
-                const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
-                res.send({
-                    data: operationByAccountIdResponse,
-                });
+                if (startDate > endDate) {
+                    res.send({ error: 'Invalid date' });
+                } else {
+                   const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
+                    res.send({
+                        data: operationByAccountIdResponse,
+                    }); 
+                }
             } else {
                 const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, localDate);
                 res.send({

@@ -18,10 +18,14 @@ export class BalanceController {
 
         try {
             if (startDate && endDate) {
-                const balanceByAccountIdResponse: number = await balanceService.getBalanceByAccountId(accountId, startDate, endDate);
-                res.send({
-                    data: balanceByAccountIdResponse,
-                });
+                if (startDate < endDate) {
+                    res.send({ error: 'Date are invalid' });
+                } else {
+                    const balanceByAccountIdResponse: number = await balanceService.getBalanceByAccountId(accountId, startDate, endDate);
+                    res.send({
+                        data: balanceByAccountIdResponse,
+                    });
+                }
             } else {
                 const balanceByAccountIdResponse: number = await balanceService.getBalanceByAccountId(accountId, null, null, localDate);
                 res.send({
