@@ -30,8 +30,8 @@ export class OperationService {
 
     async getOperationByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date) {
         if (startDate && endDate) {
-            const start = new Date(new Date(startDate).getFullYear(), new Date(startDate).getMonth(), new Date(startDate).getDay());
-            const end = new Date(new Date(endDate).getFullYear(), new Date(endDate).getMonth(), new Date(endDate).getDay());
+            const start = new Date(new Date(startDate).toISOString());
+            const end = new Date(new Date(endDate).toISOString());
             return await getManager().getRepository(OperationEntity)
                 .createQueryBuilder('operation_entity')
                 .where('operation_entity.accountId= :id And operation_entity.date>= :startDate And operation_entity.date<= :endDate', 
