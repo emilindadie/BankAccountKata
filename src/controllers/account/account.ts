@@ -10,7 +10,7 @@ export class AccountController {
             const createAccountResponse = await accountService.createAccount(account);
             res.send({ data: createAccountResponse });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 
@@ -20,7 +20,7 @@ export class AccountController {
             const getAllAccountResponse = await accountService.getAllAccount();
             res.send({ data: getAllAccountResponse });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 
@@ -33,7 +33,7 @@ export class AccountController {
                 data: userAccountResponse,
             });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 }

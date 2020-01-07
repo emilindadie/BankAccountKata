@@ -16,7 +16,7 @@ export class UserController {
             const createUserResponse = await userService.createUser(user);
             res.send({ data: createUserResponse });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 
@@ -38,7 +38,7 @@ export class UserController {
                 },
             });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 
@@ -58,7 +58,7 @@ export class UserController {
                 },
             });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 

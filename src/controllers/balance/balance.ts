@@ -32,7 +32,7 @@ export class BalanceController {
                 });
             }
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 }

@@ -19,7 +19,7 @@ export class OperationController {
                 data: createOperationResponse,
             });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 
@@ -32,7 +32,7 @@ export class OperationController {
                 data: operationByIdResponse,
             });
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 
@@ -60,7 +60,7 @@ export class OperationController {
                 });
             }
         } catch (e) {
-            res.send({ error: e });
+            res.send({ error: { message : e.message }});
         }
     }
 }
