@@ -15,7 +15,6 @@ export class BalanceController {
         const startDate = req.query['startDate'];
         const endDate = req.query['endDate'];
         const localDate = req.query['localDate'];
-
         try {
             if (startDate && endDate) {
                 if (startDate > endDate) {
@@ -33,7 +32,7 @@ export class BalanceController {
                 });
             }
         } catch (e) {
-            res.send({ error: e.message });
+            res.send({ error: e });
         }
     }
 }

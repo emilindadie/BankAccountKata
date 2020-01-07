@@ -19,7 +19,7 @@ export class OperationController {
                 data: createOperationResponse,
             });
         } catch (e) {
-            res.send({ error: e.message });
+            res.send({ error: e });
         }
     }
 
@@ -32,7 +32,7 @@ export class OperationController {
                 data: operationByIdResponse,
             });
         } catch (e) {
-            res.send({ error: e.message });
+            res.send({ error: e });
         }
     }
 
@@ -48,10 +48,10 @@ export class OperationController {
                 if (startDate > endDate) {
                     res.send({ error: 'Invalid date' });
                 } else {
-                   const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
+                    const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
                     res.send({
                         data: operationByAccountIdResponse,
-                    }); 
+                    });
                 }
             } else {
                 const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, localDate);
@@ -60,7 +60,7 @@ export class OperationController {
                 });
             }
         } catch (e) {
-            res.send({ error: e.message });
+            res.send({ error: e });
         }
     }
 }

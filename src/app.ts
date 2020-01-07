@@ -78,7 +78,6 @@ class App {
       synchronize: true,
       logging: false,
     }).then(connection => {
-      // here you can start to work with your entities
       console.log('Connected');
     }).catch(error => console.log(error));
   }

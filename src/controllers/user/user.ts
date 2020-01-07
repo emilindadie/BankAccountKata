@@ -16,7 +16,7 @@ export class UserController {
             const createUserResponse = await userService.createUser(user);
             res.send({ data: createUserResponse });
         } catch (e) {
-            res.send({ error: e.message });
+            res.send({ error: e });
         }
     }
 
@@ -27,15 +27,38 @@ export class UserController {
         try {
             const logUserResponse: User = await userService.logUser(email, password);
             const payload = { id: logUserResponse.id };
-            const jwtOptions: SignOptions = { expiresIn: process.env.EXPIREIN };
+            const jwtAccessTokenOptions: SignOptions = { expiresIn: process.env.ACCESS_TOKEN_EXPIREIN };
+            const jwtRefreshTokenOptions: SignOptions = { expiresIn: process.env.REFRESH_TOKEN_EXPIREIN };
+
             res.send({
                 data: {
-                    access_token: jwt.sign(payload, process.env.JWTSECRET, jwtOptions),
+                    access_token: jwt.sign(payload, process.env.JWTSECRET, jwtAccessTokenOptions),
+                    refresh_token: jwt.sign(payload, process.env.JWTSECRET, jwtRefreshTokenOptions),
                     user: logUserResponse,
                 },
             });
         } catch (e) {
-            res.send({ error: e.message });
+            res.send({ error: e });
+        }
+    }
+
+    public async newToken(req: Request, res: Response) {
+        const refreshToken = req.headers.authorization.split(' ')[1];
+        const verifyRefresh = jwt.verify(refreshToken, process.env.JWTSECRET);
+        const payload = { id: verifyRefresh.id };
+
+        try {
+            const jwtAccessTokenOptions: SignOptions = { expiresIn: process.env.ACCESS_TOKEN_EXPIREIN };
+            const jwtRefreshTokenOptions: SignOptions = { expiresIn: process.env.REFRESH_TOKEN_EXPIREIN };
+
+            res.send({
+                data: {
+                    access_token: jwt.sign(payload, process.env.JWTSECRET, jwtAccessTokenOptions),
+                    refresh_token: jwt.sign(payload, process.env.JWTSECRET, jwtRefreshTokenOptions),
+                },
+            });
+        } catch (e) {
+            res.send({ error: e });
         }
     }
 
