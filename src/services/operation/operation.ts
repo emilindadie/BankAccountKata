@@ -1,4 +1,4 @@
-import { getManager, Between, MoreThan, LessThan } from 'typeorm';
+import { getManager } from 'typeorm';
 import { OperationEntity } from '../../entity/operation/operation';
 import { AccountService } from '../account/account';
 import { CreateOperationDto } from '../../model/operation/operation';
@@ -37,7 +37,7 @@ export class OperationService {
                 .where('operation_entity.accountId= :id And operation_entity.date>= :startDate And operation_entity.date<= :endDate',
                 { id: accountId, startDate: start.toISOString(), endDate : end.toISOString() }).getMany();
         }
-        const start = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth(), 1);
+        const start = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth(), 2);
         const end = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth() + 1, 0);
         return await getManager().getRepository(OperationEntity)
             .createQueryBuilder('operation_entity')

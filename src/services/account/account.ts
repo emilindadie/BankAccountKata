@@ -1,5 +1,5 @@
 import { AccountEntity } from '../../entity/account/account';
-import { getManager, SelectQueryBuilder } from 'typeorm';
+import { getManager } from 'typeorm';
 import { CreateAccountDto } from '../../model/account/account';
 import { Account } from '../../model/account/account.i';
 
