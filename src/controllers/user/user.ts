@@ -44,8 +44,6 @@ export class UserController {
 
     public async newToken(req: Request, res: Response) {
         const refreshToken = req.headers.authorization.split(' ')[1];
-
-        console.log(req.headers);
         try {
             const verifyRefresh = jwt.verify(refreshToken, process.env.JWTSECRET);
             const payload = { id: verifyRefresh.id };
