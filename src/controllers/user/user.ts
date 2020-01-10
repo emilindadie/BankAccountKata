@@ -44,10 +44,10 @@ export class UserController {
 
     public async newToken(req: Request, res: Response) {
         const refreshToken = req.headers.authorization.split(' ')[1];
-        const verifyRefresh = jwt.verify(refreshToken, process.env.JWTSECRET);
-        const payload = { id: verifyRefresh.id };
 
         try {
+            const verifyRefresh = jwt.verify(refreshToken, process.env.JWTSECRET);
+            const payload = { id: verifyRefresh.id };
             const jwtAccessTokenOptions: SignOptions = { expiresIn: process.env.ACCESS_TOKEN_EXPIREIN };
             const jwtRefreshTokenOptions: SignOptions = { expiresIn: process.env.REFRESH_TOKEN_EXPIREIN };
 

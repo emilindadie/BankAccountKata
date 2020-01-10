@@ -1,11 +1,19 @@
 import { AccountService } from 'src/services/account/account';
 import { Request, Response } from 'express';
 import { Account } from 'src/model/account/account.i';
+import { CreateAccountDto } from 'src/model/account/account';
 
 export class AccountController {
     public async creacteAccount(req: Request, res: Response) {
         const accountService = new AccountService();
-        const account = req.body;
+        let account = new CreateAccountDto();
+        try {
+            account.name = req.body.name;
+            account.user = JSON.parse(req.body.user);
+        } catch (e) {
+            account = req.body;
+        }
+
         try {
             const createAccountResponse = await accountService.createAccount(account);
             res.send({ data: createAccountResponse });
