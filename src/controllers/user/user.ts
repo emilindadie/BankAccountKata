@@ -32,8 +32,8 @@ export class UserController {
 
             res.send({
                 data: {
-                    access_token: jwt.sign(payload, process.env.JWTSECRET, jwtAccessTokenOptions),
-                    refresh_token: jwt.sign(payload, process.env.JWTSECRET, jwtRefreshTokenOptions),
+                    accessToken: jwt.sign(payload, process.env.JWTSECRET, jwtAccessTokenOptions),
+                    refreshToken: jwt.sign(payload, process.env.JWTSECRET, jwtRefreshTokenOptions),
                     user: logUserResponse,
                 },
             });
@@ -45,6 +45,7 @@ export class UserController {
     public async newToken(req: Request, res: Response) {
         const refreshToken = req.headers.authorization.split(' ')[1];
 
+        console.log(req.headers);
         try {
             const verifyRefresh = jwt.verify(refreshToken, process.env.JWTSECRET);
             const payload = { id: verifyRefresh.id };
