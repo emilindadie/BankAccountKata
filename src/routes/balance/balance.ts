@@ -1,9 +1,9 @@
-import { BaseRoute } from '../base/base';
 import { BalanceController } from 'src/controllers/balance/balance';
+import { protectedRoute } from 'src/common/authentification';
 
-export class BalanceRoute extends BaseRoute {
+export class BalanceRoute {
     public balanceController: BalanceController = new BalanceController();
     public routes(app): void {
-        app.route('/balance').get(super.protectedRoute(), this.balanceController.getBalanceByAccountId);
+        app.route('/balances').get(protectedRoute(), this.balanceController.getBalanceByAccountId);
     }
 }

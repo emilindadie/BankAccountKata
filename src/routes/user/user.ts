@@ -1,12 +1,12 @@
 import { UserController } from '../../controllers/user/user';
-import { BaseRoute } from '../base/base';
+import { protectedRoute } from 'src/common/authentification';
 
-export class UserRoute extends BaseRoute {
+export class UserRoute {
     public userController: UserController = new UserController();
     public routes(app): void {
-        app.route('/user').post(this.userController.createUser);
-        app.route('/user/newtoken').get(this.userController.newToken);
-        app.route('/user/login').post(this.userController.logUser);
-        app.route('/user/protected').get(super.protectedRoute(), this.userController.protectedRoute);
+        app.route('/users').post(this.userController.createUser);
+        app.route('/users/newtoken').get(this.userController.newToken);
+        app.route('/users/login').post(this.userController.logUser);
+        app.route('/users/protected').get(protectedRoute(), this.userController.protectedRoute);
     }
 }

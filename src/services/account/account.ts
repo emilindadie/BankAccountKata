@@ -4,8 +4,7 @@ import { CreateAccountDto } from '../../model/account/account';
 import { Account } from '../../model/account/account.i';
 
 export class AccountService {
-
-    haveName(name: string) {
+    ifHaveName(name: string) {
         if (name && name.length > 0) {
             return true;
         }
@@ -13,7 +12,7 @@ export class AccountService {
     }
 
     async createAccount(createAccountDto: CreateAccountDto): Promise<Account> {
-        const haveName = await this.haveName(createAccountDto.name);
+        const haveName = await this.ifHaveName(createAccountDto.name);
         if (!haveName) {
             throw new Error('Account should have a name!');
         }

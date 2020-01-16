@@ -1,11 +1,11 @@
 import { OperationController } from '../../controllers/operation/operation';
-import { BaseRoute } from '../base/base';
+import { protectedRoute } from 'src/common/authentification';
 
-export class OperationRoute extends BaseRoute {
+export class OperationRoute {
     public operationController: OperationController = new OperationController();
     public routes(app): void {
-        app.route('/operation/:id').get(super.protectedRoute(), this.operationController.getOperationById);
-        app.route('/operation').post(super.protectedRoute(), this.operationController.createOperation);
-        app.route('/operation').get(super.protectedRoute(), this.operationController.getOperationByAccountId);
+        app.route('/operations/:id').get(protectedRoute(), this.operationController.getOperationById);
+        app.route('/operations').post(protectedRoute(), this.operationController.createOperation);
+        app.route('/operations').get(protectedRoute(), this.operationController.getOperationByAccountId);
     }
 }

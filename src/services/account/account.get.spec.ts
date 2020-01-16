@@ -8,7 +8,7 @@ describe('Get account', () => {
         accountService = new AccountService();
     });
 
-    it('Should get all account', async () => {
+    it('Should return all account when calling methode get all account ', async () => {
         // Arrange
         spyOn(accountService, 'getAllAccount').and.returnValue(Promise.resolve(allAccountMock));
 

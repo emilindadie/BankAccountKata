@@ -9,7 +9,7 @@ describe('Get balance', () => {
         balanceService = new BalanceService(new OperationService(new AccountService()));
     });
 
-    it('Should get account balance', async () => {
+    it('Should return balance when having accountId , startDate and enddate', async () => {
         // Arrange
         const inputAccountId = 1;
         spyOn(balanceService, 'getBalanceByAccountId').and.returnValue(Promise.resolve(100));

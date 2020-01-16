@@ -1,10 +1,10 @@
 import { AccountController } from 'src/controllers/account/account';
-import { BaseRoute } from '../base/base';
+import { protectedRoute } from 'src/common/authentification';
 
-export class AccountRoute extends BaseRoute {
+export class AccountRoute {
     public accountController: AccountController = new AccountController();
     public routes(app): void {
-        app.route('/account').post(super.protectedRoute(), this.accountController.creacteAccount);
-        app.route('/account').get(super.protectedRoute(), this.accountController.getAccountByUserId);
+        app.route('/accounts').post(protectedRoute(), this.accountController.creacteAccount);
+        app.route('/accounts').get(protectedRoute(), this.accountController.getAccountByUserId);
     }
 }

@@ -1,6 +1,5 @@
 import { operationMock } from '../../test-files/services/operation';
 import { OperationService } from './operation';
-import { Operation } from '../../model/operation/operation.i';
 import { AccountService } from '../account/account';
 
 describe('Get operation', () => {
@@ -10,7 +9,7 @@ describe('Get operation', () => {
         operationService = new OperationService(new AccountService());
     });
 
-    it('Should get one operation', async () => {
+    it('Should return one operation when having operationId', async () => {
         // Arrange
         const inputId = 1;
         const myOperationMock = operationMock;
@@ -23,16 +22,12 @@ describe('Get operation', () => {
         expect(output.id).toBeDefined();
     });
 
-    it('Should get all operation of one account', async () => {
-        // Arrange
+    it('Should return all operation of one account when having accountId', async () => {
         const inputId = 1;
         const myOperationMock = operationMock;
         spyOn(operationService, 'getOperationByAccountId').and.returnValue(Promise.resolve([myOperationMock]));
 
-        // Act
         const output: any = await operationService.getOperationByAccountId(inputId);
-
-        // Assert
         expect(output).toBeInstanceOf(Array);
     });
 });

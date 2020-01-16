@@ -7,7 +7,7 @@ describe('User service', () => {
         userService = new UserService();
     });
 
-    it('Should check if email exist', async () => {
+    it('Should return false when having an email which not exist in system', async () => {
         // Arrange
         const email = 'dadie.emilin@gmail.com';
         spyOn(userService, 'checkIfEmailExist').and.returnValue(Promise.resolve(false));
@@ -18,40 +18,32 @@ describe('User service', () => {
         expect(output).toEqual(false);
     });
 
-    it('Should crypt password', async () => {
-        // Arrange
+    it('Should return password crypted when having a password', async () => {
         const password = 'toto';
 
-        // Act
         const output = await userService.cryptPassword(password);
 
-        // Assert
         expect(output).not.toEqual(password);
     });
 
-    it('Should create user', async () => {
-        // Arrange
+    it('Should return a created user when having valid create user informations', async () => {
         const myUser = createUserDto;
         const myUserMock = userMock;
         spyOn(userService, 'createUser').and.returnValue(Promise.resolve(myUserMock));
 
-        // Act
         const output = await userService.createUser(myUser);
 
-        // Assert
         expect(output.id).toBeDefined();
     });
 
-    it('Should not create user (email exist)', async () => {
-        // Arrange
+    it('Should return an error when having invalid create user informations', async () => {
         const myUser = createUserDto;
         spyOn(userService, 'checkIfEmailExist').and.returnValue(Promise.resolve(true));
 
-        // Act
         try {
             const output = await userService.createUser(myUser);
+            fail();
         } catch (e) {
-            // Assert
             expect(e).toBeInstanceOf(Error);
         }
     });
