@@ -11,7 +11,7 @@ export class OperationController {
 
     public async createOperation(req: Request, res: Response) {
         const operationService = new OperationService(new AccountService());
-        const accountId = req.body['accountId'];
+        const accountId = Number(req.body['accountId']);
         const amount = Number(req.body['amount']);
         try {
             const createOperationResponse = await operationService.createOperation(accountId, amount);
