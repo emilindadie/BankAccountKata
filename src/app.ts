@@ -5,7 +5,7 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
-import { UserEntity } from '../src/entity/user/user';
+import { UserEntity } from './entity/user/user';
 import { IndexRoute } from './routes/index/index';
 import { UserRoute } from './routes/user/user';
 import configurePassport from './config';
