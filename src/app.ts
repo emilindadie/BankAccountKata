@@ -64,6 +64,8 @@ class App {
 
   private connectionConfig(): void {
     createConnection({
+      connectTimeout  : 60 * 60 * 1000,
+      acquireTimeout: 60 * 60 * 1000,
       type: 'mysql',
       host: process.env.HOST,
       port: Number(process.env.PORT),
