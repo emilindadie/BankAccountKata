@@ -1,5 +1,5 @@
 import { OperationController } from '../../controllers/operation/operation';
-import { protectedRoute } from 'src/common/authentification';
+import { protectedRoute } from '../../common/authentification';
 
 export class OperationRoute {
     public operationController: OperationController = new OperationController();

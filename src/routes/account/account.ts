@@ -1,5 +1,5 @@
-import { AccountController } from 'src/controllers/account/account';
-import { protectedRoute } from 'src/common/authentification';
+import { AccountController } from '../../controllers/account/account';
+import { protectedRoute } from '../../common/authentification';
 
 export class AccountRoute {
     public accountController: AccountController = new AccountController();

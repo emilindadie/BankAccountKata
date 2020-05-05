@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
-import { BalanceService } from 'src/services/balance/balance';
-import { OperationService } from 'src/services/operation/operation';
-import { AccountService } from 'src/services/account/account';
+import { BalanceService } from '../../services/balance/balance';
+import { OperationService } from '../../services/operation/operation';
+import { AccountService } from '../../services/account/account';
 
 export class BalanceController {
     public BalanceController() {

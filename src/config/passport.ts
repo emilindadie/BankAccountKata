@@ -4,8 +4,8 @@ import {
   StrategyOptions,
 } from 'passport-jwt';
 import { Application } from 'express';
-import { UserEntity } from 'src/entity/user/user';
 import * as dotenv from 'dotenv';
+import { UserEntity } from '../entity/user/user';
 
 export default (app: Application) => {
   dotenv.config();

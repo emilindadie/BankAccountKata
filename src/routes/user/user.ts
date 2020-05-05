@@ -1,5 +1,5 @@
 import { UserController } from '../../controllers/user/user';
-import { protectedRoute } from 'src/common/authentification';
+import { protectedRoute } from '../../common/authentification';
 
 export class UserRoute {
     public userController: UserController = new UserController();

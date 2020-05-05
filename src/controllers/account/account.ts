@@ -1,7 +1,7 @@
-import { AccountService } from 'src/services/account/account';
+import { AccountService } from '../../services/account/account';
 import { Request, Response } from 'express';
-import { Account } from 'src/model/account/account.i';
-import { CreateAccountDto } from 'src/model/account/account';
+import { Account } from '../../model/account/account.i';
+import { CreateAccountDto } from '../../model/account/account';
 
 export class AccountController {
     public async creacteAccount(req: Request, res: Response) {

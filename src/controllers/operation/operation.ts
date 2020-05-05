@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import * as dotenv from 'dotenv';
-import { OperationService } from 'src/services/operation/operation';
-import { Operation } from 'src/model/operation/operation.i';
-import { AccountService } from 'src/services/account/account';
+import { OperationService } from '../../services/operation/operation';
+import { Operation } from '../../model/operation/operation.i';
+import { AccountService } from '../../services/account/account';
 
 export class OperationController {
     public OperationController() {
