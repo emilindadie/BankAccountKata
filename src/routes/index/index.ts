@@ -1,4 +1,4 @@
-import { IndexController } from 'src/controllers/index';
+import { IndexController } from '../../controllers/index';
 
 export class IndexRoute {
     public indexController: IndexController = new IndexController();

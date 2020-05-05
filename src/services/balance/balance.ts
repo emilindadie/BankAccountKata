@@ -1,5 +1,5 @@
 import { OperationService } from '../operation/operation';
-import { Operation } from 'src/model/operation/operation.i';
+import { Operation } from '../../model/operation/operation.i';
 
 export class BalanceService {
 
