@@ -12,9 +12,9 @@ export class BalanceController {
     public async getBalanceByAccountId(req: Request, res: Response) {
         const balanceService = new BalanceService(new OperationService(new AccountService()));
         const accountId = Number(req.query['accountId']);
-        const startDate =  req.query['startDate'] as Date;
-        const endDate = req.query['endDate'] as Date;
-        const localDate = req.query['localDate'] as Date;
+        const startDate =  req.query['startDate'];
+        const endDate = req.query['endDate'];
+        const localDate = req.query['localDate'];
         try {
             if (startDate && endDate) {
                 if (startDate > endDate) {

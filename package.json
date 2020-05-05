@@ -15,6 +15,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage"
   },
+  "engines": {
+    "node": "13.8.0",
+    "npm": "6.13.6"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emilindadie/BankAccountKataApi.git"
