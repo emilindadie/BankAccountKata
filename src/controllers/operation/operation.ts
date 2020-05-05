@@ -39,9 +39,9 @@ export class OperationController {
     public async getOperationByAccountId(req: Request, res: Response) {
         const operationService = new OperationService(new AccountService);
         const accountId = Number(req.query['accountId']);
-        const startDate = new Date(req.query['startDate']);
-        const endDate = new Date(req.query['endDate']);
-        const localDate = new Date(req.query['localDate']);
+        const startDate = req.query['startDate'] as Date;
+        const endDate =  req.query['endDate'] as Date;
+        const localDate = req.query['localDate'] as Date;
 
         try {
             if (startDate && endDate) {
