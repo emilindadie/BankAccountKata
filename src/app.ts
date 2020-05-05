@@ -26,7 +26,7 @@ class App {
   constructor() {
     this.app = express();
     this.config();
-    // this.indexRoutes.routes(this.app);
+    this.indexRoutes.routes(this.app);
     this.userRoutes.routes(this.app);
     this.accountRoutes.routes(this.app);
     this.operationRoutes.routes(this.app);
@@ -42,7 +42,7 @@ class App {
     this.connectionConfig();
     this.corsConfig();
     configurePassport(this.app);
-    //this.viewConfig();
+    this.viewConfig();
   }
 
   private viewConfig(): void {
