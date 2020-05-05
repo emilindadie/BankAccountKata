@@ -8,7 +8,7 @@ export class BalanceService {
         this.operationService = operationService;
     }
 
-    async getBalanceByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date): Promise<number> {
+    async getBalanceByAccountId(accountId: number, startDate?: string, endDate?: string, localDate?: string): Promise<number> {
         const operations: Operation[] = await this.operationService.getOperationByAccountId(accountId, startDate, endDate, localDate);
         if (operations.length === 1) {
             return operations[0].amount;

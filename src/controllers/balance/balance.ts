@@ -12,21 +12,21 @@ export class BalanceController {
     public async getBalanceByAccountId(req: Request, res: Response) {
         const balanceService = new BalanceService(new OperationService(new AccountService()));
         const accountId = Number(req.query['accountId']);
-        const startDate: Date =  req.query['startDate']; 
-        const endDate: Date = req.query['endDate'];
-        const localDate: Date = req.query['localDate'];
+        const startDate = new Date(req.query['startDate']); 
+        const endDate = new Date(req.query['endDate']);
+        const localDate = new Date(req.query['localDate']);
         try {
             if (startDate && endDate) {
                 if (startDate > endDate) {
                     res.send({ error: 'Date are invalid' });
                 } else {
-                    const balanceByAccountIdResponse: number = await balanceService.getBalanceByAccountId(accountId, startDate, endDate);
+                    const balanceByAccountIdResponse: number = await balanceService.getBalanceByAccountId(accountId, startDate.toISOString(), endDate.toISOString());
                     res.send({
                         data: balanceByAccountIdResponse,
                     });
                 }
             } else {
-                const balanceByAccountIdResponse: number = await balanceService.getBalanceByAccountId(accountId, null, null, localDate);
+                const balanceByAccountIdResponse: number = await balanceService.getBalanceByAccountId(accountId, null, null, localDate.toISOString());
                 res.send({
                     data: balanceByAccountIdResponse,
                 });
