@@ -39,22 +39,22 @@ export class OperationController {
     public async getOperationByAccountId(req: Request, res: Response) {
         const operationService = new OperationService(new AccountService);
         const accountId = Number(req.query['accountId']);
-        const startDate = req.query['startDate'];
-        const endDate =  req.query['endDate'];
-        const localDate = req.query['localDate'];
+        const startDate = String(req.query['startDate']);
+        const endDate =  String(req.query['endDate']);
+        const localDate = String(req.query['localDate']);
 
         try {
             if (startDate && endDate) {
-                if (startDate > endDate) {
+                if (new Date(startDate) > new Date(endDate)) {
                     res.send({ error: 'Invalid date' });
                 } else {
-                    const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, startDate, endDate);
+                    const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, new Date(startDate), new Date(endDate));
                     res.send({
                         data: operationByAccountIdResponse,
                     });
                 }
             } else {
-                const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, localDate);
+                const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, new Date(localDate));
                 res.send({
                     data: operationByAccountIdResponse,
                 });

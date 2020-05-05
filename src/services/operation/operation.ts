@@ -28,7 +28,7 @@ export class OperationService {
         return await getManager().getRepository(OperationEntity).findOne({ id });
     }
 
-    async getOperationByAccountId(accountId: number, startDate?: string, endDate?: string, localDate?: string) {
+    async getOperationByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date) {
         if (startDate && endDate) {
             const start = new Date(new Date(startDate).toISOString());
             const end = new Date(new Date(endDate).toISOString());
