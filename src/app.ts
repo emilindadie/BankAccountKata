@@ -47,6 +47,8 @@ class App {
 
   private viewConfig(): void {
     this.app.set('views', path.join(__dirname, 'views'));
+    this.app.use("/src", express.static(path.join(__dirname + "images")));
+
     this.app.set('view engine', 'ejs');
   }
 

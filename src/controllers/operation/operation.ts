@@ -38,10 +38,10 @@ export class OperationController {
 
     public async getOperationByAccountId(req: Request, res: Response) {
         const operationService = new OperationService(new AccountService);
+
         const accountId = Number(req.query['accountId']);
-        const startDate = String(req.query['startDate']);
-        const endDate =  String(req.query['endDate']);
-        const localDate = String(req.query['localDate']);
+        const startDate = req.query['startDate'];
+        const endDate =  req.query['endDate'];
 
         try {
             if (startDate && endDate) {
@@ -54,6 +54,7 @@ export class OperationController {
                     });
                 }
             } else {
+                const localDate = req.query['localDate'];
                 const operationByAccountIdResponse: Operation[] = await operationService.getOperationByAccountId(accountId, null, null, new Date(localDate));
                 res.send({
                     data: operationByAccountIdResponse,

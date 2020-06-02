@@ -30,18 +30,21 @@ export class OperationService {
 
     async getOperationByAccountId(accountId: number, startDate?: Date, endDate?: Date, localDate?: Date) {
         if (startDate && endDate) {
-            const start = new Date(new Date(startDate).toISOString());
-            const end = new Date(new Date(endDate).toISOString());
+            const start = new Date(startDate).toISOString();
+            const end = new Date(endDate).toISOString();
             return await getManager().getRepository(OperationEntity)
                 .createQueryBuilder('operation_entity')
                 .where('operation_entity.accountId= :id And operation_entity.date>= :startDate And operation_entity.date<= :endDate',
-                { id: accountId, startDate: start.toISOString(), endDate : end.toISOString() }).getMany();
+                { id: accountId, startDate: start, endDate : end }).getMany();
         }
-        const start = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth(), 2);
-        const end = new Date(new Date(localDate).getFullYear(), new Date(localDate).getMonth() + 1, 0);
+        const myLocalDate = new Date(localDate);
+
+        var firstDay = new Date(myLocalDate.getFullYear(), myLocalDate.getMonth(), 1);
+        const lastDay = new Date(myLocalDate.getFullYear(), myLocalDate.getMonth() + 1, 0);
+
         return await getManager().getRepository(OperationEntity)
             .createQueryBuilder('operation_entity')
             .where('operation_entity.accountId= :id And operation_entity.date>= :startDate And operation_entity.date<= :endDate',
-            { id: accountId, startDate: start.toISOString(), endDate : end.toISOString() }).getMany();
-    }
+            { id: accountId, startDate: firstDay.toISOString(), endDate : lastDay.toISOString() }).getMany();
+        }
 }
