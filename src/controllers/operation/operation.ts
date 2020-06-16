@@ -36,7 +36,8 @@ export class OperationController {
         }
     }
 
-    public async getOperationByAccountId(req: Request, res: Response) {
+    public async getOperationsByAccountId(req: Request, res: Response) {
+        console.log('eioeioeiooeoi 1');
         const operationService = new OperationService(new AccountService);
 
         const accountId = Number(req.query['accountId']);
@@ -60,6 +61,19 @@ export class OperationController {
                     data: operationByAccountIdResponse,
                 });
             }
+        } catch (e) {
+            res.send({ error: { message : e.message }});
+        }
+    }
+
+    public async getLastOperationByAccountId(req: Request, res: Response) {
+        const operationService = new OperationService(new AccountService);
+        const accountId = Number(req.query['accountId']);
+        try {
+            const lastOperationByAccountIdResponse: Operation = await operationService.getLastOperationByAccountId(accountId);
+            res.send({
+                data: lastOperationByAccountIdResponse,
+            });
         } catch (e) {
             res.send({ error: { message : e.message }});
         }

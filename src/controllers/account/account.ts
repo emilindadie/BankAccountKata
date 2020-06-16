@@ -9,6 +9,7 @@ export class AccountController {
         let account = new CreateAccountDto();
         try {
             account.name = req.body.name;
+            console.log(req.body);
             account.user = JSON.parse(req.body.user);
         } catch (e) {
             account = req.body;

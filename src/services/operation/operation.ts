@@ -46,5 +46,14 @@ export class OperationService {
             .createQueryBuilder('operation_entity')
             .where('operation_entity.accountId= :id And operation_entity.date>= :startDate And operation_entity.date<= :endDate',
             { id: accountId, startDate: firstDay.toISOString(), endDate : lastDay.toISOString() }).getMany();
-        }
+    }
+
+    async getLastOperationByAccountId(accountId: number){
+        const res =  await getManager().getRepository(OperationEntity)
+        .createQueryBuilder('operation_entity')
+        .orderBy({date : 'DESC'})
+        .where('operation_entity.accountId= :id',
+        { id: accountId}).getMany();
+        return res[0];
+    }
 }
